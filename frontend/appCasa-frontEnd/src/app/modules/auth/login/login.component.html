@@ -1,0 +1,11 @@
+<div class="container">
+        <div class="login-form">
+        <img src="../../../../assets/images/disco-voador2.png" alt="Logo" class="logo">
+        <h2 class="titleLarge">Login</h2>
+        <form method="post">
+            <input type="text" placeholder="Login" class="rounded-input" name="emailInput" [(ngModel)]="email">
+            <input type="password" placeholder="Senha" class="rounded-input" name="passwordInput" [(ngModel)]="password">
+            <button (click)="onLogin()" type="submit" class="button button-text">Entrar</button>
+        </form>
+        </div>
+</div>

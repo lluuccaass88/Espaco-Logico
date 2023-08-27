@@ -1,0 +1,20 @@
+.command-container{
+    width: 570%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -60px;
+}
+
+.square{
+    width: 130%;
+    height: 100%;
+    background-color: #FFC700;
+    border-radius: 15px;
+    position: relative;
+    text-align: center;
+}
+
+#containerCanva1{
+    width: 100%;
+}

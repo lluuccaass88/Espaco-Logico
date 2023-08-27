@@ -1,0 +1,25 @@
+<div class="container">
+    <app-message-error class="container-error" *ngIf="showErrorMessage" [errorMessage]="errorMessage"> </app-message-error>
+    <div class="login-form">
+    <img src="../../../../assets/images/disco-voador2.png" alt="Logo" class="logo">
+    <h2 class="titleLarge">Cadastro</h2>
+    <form  method="post">
+        <input type="email"  placeholder="Email" class="rounded-input" name="emailInput" [(ngModel)]="email">
+        <input type="text" placeholder="Nome de usuário" class="rounded-input" name="emailInput" [(ngModel)]="userName">
+        <select class="dropdown-input" name="roleInput" placeholder="Escolha seu papel" [(ngModel)]="role">
+            <option value="" disabled selected>Escolha seu papel</option>
+            <option value="professor">Professor</option>
+            <option value="estudante">Estudante</option>
+          </select>
+        <input type="password" placeholder="Senha" class="rounded-input" name="emailInput" [(ngModel)]="password">
+        <div class="textContainer">
+            <p class="paragraph bold">A senha deve possuir:</p>
+            <p class="paragraph">Pelo menos 6 caracteres</p>
+            <p class="paragraph">Pelo menos 1 numero</p>
+            <p class="paragraph">Letras maiusculas e minusculas</p>
+        </div>
+        <input type="password" placeholder="Repisa sua senha" class="rounded-input" name="passwordInput" [(ngModel)]="passwordConsfirm">
+        <button (click)="registerNewUser()" class="button button-text">Cadastrar</button>
+    </form>
+    </div>
+</div>

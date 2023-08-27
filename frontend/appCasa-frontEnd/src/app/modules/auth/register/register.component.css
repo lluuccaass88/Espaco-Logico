@@ -1,0 +1,29 @@
+.logo {
+    width: 50%;
+}
+
+.login-form {
+  width: 40%;
+  text-align: center;
+  }
+
+.bold{
+  font-weight: bold;
+}
+
+.textContainer{
+  margin-left: 15%;
+}
+
+.paragraph {
+  font-family: 'Roboto', sans-serif;
+  font-size: 10;
+  font-weight: 200;
+  color: white;
+  text-align: left;
+  margin: 2px;
+}
+
+
+
+
