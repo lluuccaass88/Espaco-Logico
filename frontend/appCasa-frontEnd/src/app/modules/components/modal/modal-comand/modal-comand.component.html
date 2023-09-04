@@ -1,0 +1,11 @@
+<div class="containerModal">
+    <p class="titleMedium">Configuração comando</p>
+    <form  method="post">
+        <p class="titleLow">Valor de X:</p>
+        <input type="email" class="rounded-input" name="emailInput" [(ngModel)]="valX"> 
+        <p class="titleLow">Valor de Y:</p>
+        <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="valY">
+        <p class="error, paragraph" *ngIf="showError">Apenas numeros são aceitos</p>
+        <button class="button button-text" (click)="addNewComand()">Adicionar</button>
+    </form>
+</div>

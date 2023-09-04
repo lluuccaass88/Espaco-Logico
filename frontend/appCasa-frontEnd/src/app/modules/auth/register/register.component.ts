@@ -37,10 +37,7 @@ export class RegisterComponent {
       this.apiService.register(data).subscribe(res => {
         this.token = res.token
 
-        console.log(res)
-
         if(this.token != ''){
-          console.log("Entoru")
           this.router.navigate(['/login']);
         }else{
           this.errorMessage = res.error.error;

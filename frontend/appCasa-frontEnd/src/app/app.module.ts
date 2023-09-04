@@ -12,14 +12,15 @@ import { HomePageComponent } from './modules/auth/home-page/home-page.component'
 import { LoginComponent } from './modules/auth/login/login.component';
 
 import { ApiService } from './service/ApiAuthService';
+import { InstructionService } from './service/InstructionService';
 import { InputValidator } from './service/utils/InputValidator';
 import { MessageErrorComponent } from './modules/components/message-error/message-error.component';
 import { GameScreenComponent } from './modules/game/game-screen/game-screen.component';
 import { HomeStudentComponent } from './modules/game/home-student/home-student.component';
-import { ComandComponentComponent } from './modules/components/comand-component/comand-component.component';
-import { IfComponentComponent } from './modules/components/if-component/if-component.component';
-import { ForComponentComponent } from './modules/components/for-component/for-component.component';
-
+import { BuildComands } from './modules/components/BuildComands';
+import { ModalComandComponent } from './modules/components/modal/modal-comand/modal-comand.component';
+import { ModalIfComponent } from './modules/components/modal/modal-if/modal-if.component';
+import { ModalForComponent } from './modules/components/modal/modal-for/modal-for.component';
 
 
 @NgModule({
@@ -31,9 +32,9 @@ import { ForComponentComponent } from './modules/components/for-component/for-co
     LoginComponent,
     GameScreenComponent,
     HomeStudentComponent,
-    ComandComponentComponent,
-    IfComponentComponent,
-    ForComponentComponent
+    ModalComandComponent,
+    ModalIfComponent,
+    ModalForComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,9 @@ import { ForComponentComponent } from './modules/components/for-component/for-co
   ],
   providers: [
     ApiService,
-    InputValidator
+    InstructionService,
+    InputValidator,
+    BuildComands
   ],
   bootstrap: [AppComponent]
 })

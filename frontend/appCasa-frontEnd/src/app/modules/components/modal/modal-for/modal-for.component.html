@@ -1,0 +1,21 @@
+<div class="containerModal">
+    <p class="titleMedium">Configuração ENQUANTO</p>
+    <form  method="post">
+        <p class="titleLow">Valor de X:</p>
+        <input type="email" class="rounded-input" name="emailInput" [(ngModel)]="valX"> 
+        
+        <p class="titleLow">Condição:</p>
+        <select class="dropdown-input" name="conditionInput" placeholder="Escolha seu papel" [(ngModel)]="condition">
+            <option value="" disabled selected> </option>
+            <option value="maior-igual">maior igual</option>
+            <option value="menor-igual">menor igual</option>
+            <option value="igual">igual</option>
+            <option value="diferente">diferente</option>
+          </select>
+
+        <p class="titleLow">Valor de Y:</p>
+        <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="valY">
+        <p class="error, paragraph" *ngIf="showError">Apenas numeros são aceitos</p>
+        <button class="button button-text" (click)="addNewComand()">Adicionar</button>
+    </form>
+</div>\

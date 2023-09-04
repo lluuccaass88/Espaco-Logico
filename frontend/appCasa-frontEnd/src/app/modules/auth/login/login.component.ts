@@ -29,8 +29,6 @@ export class LoginComponent {
       this.apiService.signIn(data).subscribe(res => {
         this.token = res.token
 
-        console.log(res)
-
         if(this.token != ''){
           localStorage.setItem('authToken', this.token.toString());
           this.router.navigate(['/home']);

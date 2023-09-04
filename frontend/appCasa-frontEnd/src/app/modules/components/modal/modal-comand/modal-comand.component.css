@@ -1,0 +1,24 @@
+.containerModal{
+    width: 100%;
+    background-color: #101010;
+    padding: 10px;
+}
+
+.paragraph{
+    color: red;
+}
+
+.titleMedium{
+    font-size: 220%;
+}
+
+.titleLow{
+    text-align: left;
+    margin-left: 25%;
+    margin-bottom: 10px;
+}
+
+.rounded-input {
+    width: 50%;
+    padding: 1.7%;
+}

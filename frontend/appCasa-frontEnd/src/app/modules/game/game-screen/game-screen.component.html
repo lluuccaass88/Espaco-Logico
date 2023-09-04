@@ -4,13 +4,16 @@
         <div class="column-left">
           <!-- Conteúdo da primeira coluna -->
           <h2 class="titleLarge">Escolha o comando</h2>
-          <comand-component> </comand-component>
-          <app-if-component> </app-if-component>
-          <p>Primeira coluna (30% da tela)</p>
+          <!-- <comand-component> </comand-component>
+          <app-if-component> </app-if-component> -->
+          <div id="containerCanva"></div>
         </div>
         <div class="column-right">
           <!-- Conteúdo da segunda coluna -->
-          <p>Segunda coluna (70% da tela)</p>
+          <!-- <p>Segunda coluna (70% da tela)</p> -->
+          <app-modal-comand *ngIf="showModal==0"></app-modal-comand>
+          <app-modal-if *ngIf="showModal==1"></app-modal-if>
+          <app-modal-for *ngIf="showModal==2"></app-modal-for>
 
         </div>
       </div>      
