@@ -15,7 +15,7 @@
 
         <p class="titleLow">Valor de Y:</p>
         <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="valY">
-        <p class="error, paragraph" *ngIf="showError">Apenas numeros são aceitos</p>
+        <p class="error, paragraph" *ngIf="showError">{{errorMesage}}</p>
         <button class="button button-text" (click)="addNewComand()">Adicionar</button>
     </form>
 </div>\

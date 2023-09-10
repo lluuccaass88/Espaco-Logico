@@ -1,11 +1,61 @@
 <div class="containerModal">
     <p class="titleMedium">Configuração comando</p>
     <form  method="post">
-        <p class="titleLow">Valor de X:</p>
-        <input type="email" class="rounded-input" name="emailInput" [(ngModel)]="valX"> 
-        <p class="titleLow">Valor de Y:</p>
-        <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="valY">
-        <p class="error, paragraph" *ngIf="showError">Apenas numeros são aceitos</p>
-        <button class="button button-text" (click)="addNewComand()">Adicionar</button>
+        <div *ngIf="formChooseAction">
+            <p class="titleLow">Escolha a ação:</p>
+            <select class="dropdown-input" name="action" placeholder="Escolha seu papel" [(ngModel)]="action">
+                <option value="" disabled selected> </option>
+                <option value=0>Criar Variavel</option>
+                <option value=1>Manipular Variavel</option>
+                <option value=2>Pintar</option>
+              </select>
+            <button class="button button-text" (click)="chooseAction()">Próximo</button>
+        </div>
+
+        <div>
+
+        </div>
+
+        <div *ngIf="formNewVariable">
+            <p class="titleComand">Nova Variável</p>
+            <p class="titleLow">Nome da Váriavel:</p>
+            <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="variableName"> 
+           
+            <p *ngIf="!showDefineValue" (click)="startWithValue()" class="textAction">Inicializar com valor</p>
+            <p *ngIf="showDefineValue" (click)="startWithValue()" class="textAction ">Não inicializar com valor </p>    
+           
+            <p *ngIf="showDefineValue" class="titleLow">Valor:</p>
+            <input *ngIf="showDefineValue" type="text" class="rounded-input" name="emailInput" [(ngModel)]="variableValue"> 
+            <p class="error, paragraph" *ngIf="showError">{{errorMesage}}</p>
+            <button class="button button-text" (click)="addNewVariable()">Adicionar</button>
+        </div>
+
+        <div *ngIf="formManipulateVariable">
+            <p class="titleComand">Manipular Variável</p>
+            <p class="titleLow">Nome da Váriavel:</p>
+            <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="variableName"> 
+            <p class="titleLow">Ação:</p>
+            <select class="dropdown-input" name="action" placeholder="Escolha seu papel" [(ngModel)]="manipulationVariable">
+                <option value="" disabled selected> </option>
+                <option value=0>Somar</option>
+                <option value=1>Diminuir</option>
+              </select>
+            <p class="titleLow">Valor:</p>
+            <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="valueManipulation"> 
+            <p class="error, paragraph" *ngIf="showError">{{errorMesage}}</p>
+            <button class="button button-text" (click)="addNewManipulateVariable()">Adicionar</button>
+        </div>
+
+        <div *ngIf="formactionPaint">
+            <p class="titleLow">Valor de X:</p>
+            <input type="email" class="rounded-input" name="emailInput" [(ngModel)]="valX"> 
+            <p class="titleLow">Valor de Y:</p>
+            <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="valY">
+            <p class="error, paragraph" *ngIf="showError">Apenas numeros são aceitos</p>
+            <button class="button button-text" (click)="addNewPaint()">Adicionar</button>
+        </div>
+
+
+
     </form>
 </div>

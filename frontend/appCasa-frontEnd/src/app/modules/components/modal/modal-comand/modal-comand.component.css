@@ -22,3 +22,26 @@
     width: 50%;
     padding: 1.7%;
 }
+
+.dropdown-input{
+    width: 53%;
+    margin-bottom: 20px;
+}
+
+.titleComand{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 140%;
+    color: white;
+    text-align: center;
+}
+
+.textAction{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 100%;
+    color: #3CDE38;
+    text-align: center;
+    cursor: pointer;
+}
+  

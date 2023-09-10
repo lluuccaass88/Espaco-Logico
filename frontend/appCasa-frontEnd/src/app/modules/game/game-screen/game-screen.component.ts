@@ -85,21 +85,29 @@ export class GameScreenComponent {
       document.body.style.cursor = 'default'; // Ou o cursor padrão que desejar
     });
 
-
     comandComponent.on('click', function () {
-      console.log("Command")
       self.showModal = 0
-      console.log(self.showModal)
     });    
+    comandTextComponent.on('click', ()=>{
+      self.showModal = 0
+    })
     
     ifComponent.on('click', function () {
       console.log("if")
       self.showModal = 1
     });
+    ifTextComponent.on('click', ()=>{
+      self.showModal = 1
+    })
 
     forComponent.on('click', function () {
       console.log("for")
       self.showModal = 2
     });
+    forTextComponent.on('click', ()=>{
+      self.showModal = 2
+    })
+
   }
+
 }
