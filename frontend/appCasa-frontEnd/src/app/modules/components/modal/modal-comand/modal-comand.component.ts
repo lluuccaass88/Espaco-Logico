@@ -6,6 +6,8 @@ import { NewVariable } from 'src/app/model/instruction/NewVariable';
 import { VariableHandler } from 'src/app/model/instruction/VariableHandler';
 import { Paint } from 'src/app/model/instruction/Paint';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-modal-comand',
   templateUrl: './modal-comand.component.html',
@@ -32,7 +34,7 @@ export class ModalComandComponent {
   valX: number | undefined;
   valY: number | undefined;
   
-  constructor(private inputValidator:InputValidator, private instructionService: InstructionService){}
+  constructor(private inputValidator:InputValidator, private instructionService: InstructionService, private router: Router){}
 
   public chooseAction(){
     if(this.action == 0){
@@ -46,6 +48,8 @@ export class ModalComandComponent {
       this.formChooseAction = false;
       this.formactionPaint = true;
     }
+
+    
   }
 
   public addNewVariable():void{

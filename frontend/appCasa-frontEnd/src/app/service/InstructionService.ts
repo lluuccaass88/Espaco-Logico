@@ -8,18 +8,18 @@ export class InstructionService {
     //localStorage.removeItem('instructionList') 
 
     const storedList = localStorage.getItem('instructionList');
+    let variableToSave: any|undefined
+
     if (storedList) {
       this.instructionList = JSON.parse(storedList);
+      variableToSave = this.buildInstruction(type, instruction, false);
 
-      const variableToSave: any = this.buildInstruction(type, instruction, false);
-
-      this.instructionList.push(variableToSave);
-      localStorage.setItem('instructionList', JSON.stringify(this.instructionList));
     } else {
-      const variableToSave: any = this.buildInstruction(type, instruction, true);
-      this.instructionList.push(variableToSave);
-      localStorage.setItem('instructionList', JSON.stringify(this.instructionList));
+      variableToSave = this.buildInstruction(type, instruction, true);
     }
+    
+    this.instructionList.push(variableToSave);
+    localStorage.setItem('instructionList', JSON.stringify(this.instructionList));
 
     const storedListAtual = localStorage.getItem('instructionList');
 
@@ -41,8 +41,7 @@ private buildInstruction(type?: string, instructionPreBuild?: any, isFirt?: bool
   if(type == 'paint')
     resultInstruction = new Instruction(type, undefined, undefined, instructionPreBuild);
 
-
-  if(type == 'if')
+  if(type == 'if') //Construir a lógica aqui dentro
     resultInstruction = new Instruction(type, undefined, undefined, undefined, instructionPreBuild);
 
   if(type == 'for')

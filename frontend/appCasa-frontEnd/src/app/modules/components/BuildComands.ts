@@ -45,7 +45,7 @@ export class BuildComands{
           return new Konva.default.Text({
             x: posX,
             y: posY,
-            text: 'PINTE(X, Y)',
+            text: 'Comando',
             fontSize: 20,
             fontFamily: 'Arial',
             fill: 'white',

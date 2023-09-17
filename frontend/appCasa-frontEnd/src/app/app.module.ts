@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +21,8 @@ import { BuildComands } from './modules/components/BuildComands';
 import { ModalComandComponent } from './modules/components/modal/modal-comand/modal-comand.component';
 import { ModalIfComponent } from './modules/components/modal/modal-if/modal-if.component';
 import { ModalForComponent } from './modules/components/modal/modal-for/modal-for.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer'; // <- import PdfViewerModule
+import { PdfRenderComponent } from './modules/game/pdf-render/pdf-render.component';
 
 
 @NgModule({
@@ -34,14 +36,16 @@ import { ModalForComponent } from './modules/components/modal/modal-for/modal-fo
     HomeStudentComponent,
     ModalComandComponent,
     ModalIfComponent,
-    ModalForComponent
+    ModalForComponent,
+    PdfRenderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    PdfViewerModule
   ],
   providers: [
     ApiService,
