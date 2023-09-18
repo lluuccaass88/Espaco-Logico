@@ -15,9 +15,8 @@ export class Instruction {
     newVariable?: NewVariable
     variableHandler?: VariableHandler
     paint?: Paint
-    ifC?: If
+    ifC: If | undefined 
     forC?: For
-
 
     constructor(type?: string, newVariabele?: NewVariable, variableHandler?: VariableHandler, paint?: Paint,
         newIf?: If, newFor?: For){
@@ -25,70 +24,10 @@ export class Instruction {
         this.newVariable = newVariabele;
         this.variableHandler = variableHandler;
         this.paint = paint;
-        this.ifC = newIf;
+        if(newIf != undefined)
+            this.ifC = newIf;
         this.forC = newFor;
     }
-
-
-
-    // idInstruction?:number;
-    // type?: String;
-    // positionX?: number;
-    // positionY?: number;
-    // previous?: number;
-
-    // condition?: string;
-
-    // val1?: number;
-    // val2?: number;
-
-    // variableName?:String;
-    // manipulationVariable?:number;
-    // valueManipulation?:String;
-
-
-    // constructor(
-    //     type?: string,
-    //     val1?: number,
-    //     val2?: number,
-    //     condition?: string,
-    //     variableName?: string,
-    //     manipulationVariable?: number,
-    //     valueManipulation?: string
-    //   ) {
-    //     this.type = type;
-    //     this.condition = condition;
-    //     this.val1 = val1;
-    //     this.val2 = val2;
-    //     this.variableName = variableName;
-    //     this.manipulationVariable = manipulationVariable;
-    //     this.valueManipulation = valueManipulation;
-    //   }
-
-
-    // public getStruction():any{
-    //     return {
-    //         type: this.type, 
-    //         positionX: this.positionX,
-    //         positionY: this.positionY,
-    //         previous: this.previous,
-    //         comand: {
-    //             newVariable: {
-
-    //             },
-    //             manipulateVariable: {
-    //                 variableName: this.variableName,
-    //                 manipulationVariable: this.manipulationVariable,
-    //                 valueManipulation: this.valueManipulation
-    //             },
-    //             paint: {
-    //                 val1: this.val1,
-    //                 val2: this.val2
-    //             }
-    //         }
-
-    //     }
-    // }
 
     public setIdInstruction(idInstruction:number){
         this.idInstruction = idInstruction
@@ -99,7 +38,8 @@ export class Instruction {
     }
 
     public setPrevious(previous:number|undefined){
-        this.previous = previous;
+        if(previous)
+        this.previous = previous-1;
     }
 
   }

@@ -2,6 +2,7 @@ export class VariableHandler{
     name?: string;
     manipulation?: number;
     value?: number;
+    linkedInstructionId?: number;
 
     constructor(name?: string, manipulation?: number, value?: number){
         this.name = name;
@@ -9,5 +10,8 @@ export class VariableHandler{
         this.value = value;
     }
 
+    public setLinkedInstructionId(linkedInstructionId?: number){
+        this.linkedInstructionId = linkedInstructionId;
+    }
 
 }

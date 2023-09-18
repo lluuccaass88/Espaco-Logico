@@ -52,7 +52,7 @@ export class ModalIfComponent {
     }
     
     if(contValidationSuccess == 0){
-      let newIf:If = new If(this.valX, this.valY, this.condition)
+      let newIf:If = new If(this.valX, this.valY, this.condition, this.quantityInstructions)
       this.instructionService.addInstruction('if', newIf);
     }
 

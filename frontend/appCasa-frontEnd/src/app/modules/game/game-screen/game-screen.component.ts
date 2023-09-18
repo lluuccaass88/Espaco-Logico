@@ -93,7 +93,6 @@ export class GameScreenComponent {
     })
     
     ifComponent.on('click', function () {
-      console.log("if")
       self.showModal = 1
     });
     ifTextComponent.on('click', ()=>{
@@ -101,7 +100,6 @@ export class GameScreenComponent {
     })
 
     forComponent.on('click', function () {
-      console.log("for")
       self.showModal = 2
     });
     forTextComponent.on('click', ()=>{
