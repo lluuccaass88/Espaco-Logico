@@ -15,6 +15,9 @@
 
         <p class="titleLow">Valor de Y:</p>
         <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="valY">
+        <p class="titleLow">Quantidade de instruções:</p>
+        <input type="text" class="rounded-input" name="emailInput" [(ngModel)]="quantityInstructions">
+        
         <p class="error, paragraph" *ngIf="showError">{{errorMesage}}</p>
         <button class="button button-text" (click)="addNewComand()">Adicionar</button>
     </form>

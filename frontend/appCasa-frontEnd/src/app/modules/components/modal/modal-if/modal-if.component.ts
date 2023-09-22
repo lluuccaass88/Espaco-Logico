@@ -50,6 +50,12 @@ export class ModalIfComponent {
         contValidationSuccess++
       }  
     }
+
+    if(this.instructionService.checkPreviousInstruction("for")){
+      this.showError = true
+      this.errorMesage = "Esta instrução não pode ser adicionada, pois a intrução anterior é uma instrução do tipo ENQUANTO."
+      contValidationSuccess++
+    }
     
     if(contValidationSuccess == 0){
       let newIf:If = new If(this.valX, this.valY, this.condition, this.quantityInstructions)

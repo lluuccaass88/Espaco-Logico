@@ -19,7 +19,7 @@ export class Instruction {
     forC?: For
 
     constructor(type?: string, newVariabele?: NewVariable, variableHandler?: VariableHandler, paint?: Paint,
-        newIf?: If, newFor?: For){
+        newIf?: If, newFor?: For, positionX?: number, positionY?: number){
         this.type = type;
         this.newVariable = newVariabele;
         this.variableHandler = variableHandler;
@@ -27,6 +27,8 @@ export class Instruction {
         if(newIf != undefined)
             this.ifC = newIf;
         this.forC = newFor;
+        this.positionX = positionX;
+        this.positionY = positionY;
     }
 
     public setIdInstruction(idInstruction:number){

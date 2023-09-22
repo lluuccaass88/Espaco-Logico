@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import { RegisterComponent } from './modules/auth/register/register.component';
@@ -23,6 +22,7 @@ import { ModalIfComponent } from './modules/components/modal/modal-if/modal-if.c
 import { ModalForComponent } from './modules/components/modal/modal-for/modal-for.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer'; // <- import PdfViewerModule
 import { PdfRenderComponent } from './modules/game/pdf-render/pdf-render.component';
+import { FlowchartComponent } from './modules/components/flowchart/flowchart.component';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import { PdfRenderComponent } from './modules/game/pdf-render/pdf-render.compone
     ModalComandComponent,
     ModalIfComponent,
     ModalForComponent,
-    PdfRenderComponent
+    PdfRenderComponent,
+    FlowchartComponent
   ],
   imports: [
     BrowserModule,

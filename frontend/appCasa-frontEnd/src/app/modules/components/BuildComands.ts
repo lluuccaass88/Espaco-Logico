@@ -6,7 +6,8 @@ import { Rect } from 'konva/lib/shapes/Rect';
 
 export class BuildComands{    
 
-    builfIf(posX:number, posY:number):Shape<ShapeConfig>{
+    builfIf(posX:number, posY:number, flowchart: boolean = false):Shape<ShapeConfig>{
+       if(flowchart){
         return new Konva.default.RegularPolygon({
           x: posX,
           y: posY,
@@ -14,19 +15,54 @@ export class BuildComands{
           radius: 70,
           fill: '#131DFF'
         });
+       }else{
+        return new Konva.default.RegularPolygon({
+          x: posX,
+          y: posY,
+          sides: 4,
+          radius: 70,
+          fill: '#131DFF'
+        });
+       }
+        
     }
 
-    buildComand(posX:number, posY:number): Shape<ShapeConfig>{
+    buildComand(posX:number, posY:number, flowchart: boolean = false): Shape<ShapeConfig>{
+      if(flowchart){
         return new Konva.default.Rect({
-            x: posX,
-            y: posY,
-            width: 170,
-            height: 65,
-            fill: '#FFC700',
-            strokeWidth: 4,
-            cornerRadius: 15 // Ajuste o valor conforme necessário
-          });
+          x: posX,
+          y: posY,
+          width: 150,
+          height: 60,
+          fill: '#FFC700',
+          strokeWidth: 4,
+          cornerRadius: 15 // Ajuste o valor conforme necessário
+        });
+      }else{
+        return new Konva.default.Rect({
+          x: posX,
+          y: posY,
+          width: 170,
+          height: 65,
+          fill: '#FFC700',
+          strokeWidth: 4,
+          cornerRadius: 15 // Ajuste o valor conforme necessário
+        });
+      }
+
     }
+
+    buildStartAndFinish(posX:number, posY:number): Shape<ShapeConfig>{
+      return new Konva.default.Rect({
+          x: posX,
+          y: posY,
+          width: 170,
+          height: 55,
+          fill: '#38B6FF',
+          strokeWidth: 4,
+          cornerRadius: 50 // Ajuste o valor conforme necessário
+        });
+  }
 
     buildFor(posX:number, posY:number): Shape<ShapeConfig>{
       return new Konva.default.RegularPolygon({
@@ -39,7 +75,7 @@ export class BuildComands{
       
     }
 
-    buildText(posX:number, posY:number, type:String): Shape<ShapeConfig>{
+    buildText(posX:number, posY:number, type:String, customText?: string): Shape<ShapeConfig>{
       switch(type){
         case 'comand':
           return new Konva.default.Text({
@@ -68,6 +104,17 @@ export class BuildComands{
             x: posX,
             y: posY,
             text: 'ENQUANTO',
+            fontSize: 18,
+            fontFamily: 'Arial',
+            fill: 'white',
+            fontStyle: 'bold'
+          });
+        break;
+        case 'custom':
+          return new Konva.default.Text({
+            x: posX,
+            y: posY,
+            text: customText,
             fontSize: 18,
             fontFamily: 'Arial',
             fill: 'white',

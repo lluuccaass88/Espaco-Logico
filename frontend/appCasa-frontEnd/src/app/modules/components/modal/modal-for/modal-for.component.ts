@@ -18,6 +18,7 @@ export class ModalForComponent {
   valX: number | string | undefined;
   valY: number | string | undefined;
   condition: string | undefined;
+  quantityInstructions: number | undefined;
 
   constructor(private inputValidator:InputValidator, private instructionService: InstructionService){}
 
@@ -30,12 +31,24 @@ export class ModalForComponent {
       contValidationSuccess++;
     }
 
+    if(!this.inputValidator.isNumeric(this.quantityInstructions)){
+      this.showError = true;
+      this.errorMesage = "O campo quantidade de instruções deve ser preenchido com um número."
+      contValidationSuccess++;
+    }
+
     if(!this.inputValidator.isNumeric(this.valX)){
       if(!this.instructionService.variableExists(this.valX)){
         this.showError = true
         this.errorMesage = "A váriavel digitada no campo valX não foi previamente declarada."
         contValidationSuccess++
       }    
+    }
+
+    if(this.instructionService.checkPreviousInstruction("if")){
+      this.showError = true
+      this.errorMesage = "Esta instrução não pode ser adicionada, pois a intrução anterior é uma instrução do tipo SE."
+      contValidationSuccess++
     }
 
     if(!this.inputValidator.isNumeric(this.valY)){
@@ -47,7 +60,7 @@ export class ModalForComponent {
     }
 
     if(contValidationSuccess == 0){
-      let newFor:For = new For(this.valX, this.valY, this.condition)
+      let newFor:For = new For(this.valX, this.valY, this.condition, this.quantityInstructions)
       this.instructionService.addInstruction('for', newFor);
     }
 
