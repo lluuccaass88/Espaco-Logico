@@ -8,12 +8,14 @@ export class For{
     intructions: Instruction[] = [];
     
     constructor(valX?: number | string, valY?: number | string, condition?: string,
-        quantityInstructions?: number){
+        quantityInstructions?: number, instructions?: any){
         this.valX = valX;
         this.valY = valY;
         this.condition = condition;
         if(quantityInstructions)
         this.quantityInstructions = quantityInstructions;
+        if(instructions)
+        this.intructions = instructions;
     }
 
     public setInstructions(instruction: Instruction){

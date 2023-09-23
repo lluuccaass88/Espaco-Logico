@@ -38,7 +38,6 @@ export class FlowchartComponent {
       layer.add(startComponent);
       layer.add(newText);
 
-
       if(currentInstruction.type == 'variable'){
         newInstruction = this.buildComands.buildComand(currentInstruction.positionX, currentInstruction.positionY) 
         if(!newInstruction.value){
@@ -107,7 +106,7 @@ export class FlowchartComponent {
 
       }
 
-      
+
       if(currentInstruction.type == 'for'){
         newInstruction = this.buildComands.buildFor(currentInstruction.positionX, currentInstruction.positionY)
         newText = this.buildComands.buildText(currentInstruction.positionX - 12, currentInstruction.positionY - 10, 'custom', `ENQUANTO ${currentInstruction.forC.valX} for ${currentInstruction.forC.condition} de ${currentInstruction.forC.valX}`);

@@ -26,9 +26,16 @@ export class InstructionService {
       variableToSave = this.buildInstruction(type, instruction, true);
     }
 
-    if(!this.hasReachedLimit(isFirt, JSON.parse(storedList))){  // se for o primeiro, se não for do tipo "if", se o numero de instruções dentro do if for menor que a quantidade definida
+    if(isFirt){
+      this.setPosition(variableToSave, false)
+      instructionList.push(variableToSave)  
+    } else if(!this.hasReachedLimit(isFirt, JSON.parse(storedList))){  // se for o primeiro, se não for do tipo "if", se o numero de instruções dentro do if for menor que a quantidade definida
       this.setPosition(variableToSave, true)
       this.linkInstructions(variableToSave, instructionList);
+    }else if(JSON.parse(storedList)[JSON.parse(storedList).length - 1].type == 'if' 
+      || JSON.parse(storedList)[JSON.parse(storedList).length - 1].type == 'for'){
+        this.setPosition(variableToSave, true)
+        instructionList.push(variableToSave)  
     }else{
       this.setPosition(variableToSave, false)
       instructionList.push(variableToSave)  
@@ -128,69 +135,18 @@ export class InstructionService {
     let forInstance: For;
     let instructionInstance: Instruction;
 
-console.log("oi")
-
     if(instructionList)
       if(instructionList[instructionList.length-1].type == 'if'){
         retrievedInstruction = instructionList[instructionList.length-1]
-        console.log(retrievedInstruction)
 
         ifInstance = new If(retrievedInstruction.ifC.valX, retrievedInstruction.ifC.valY, retrievedInstruction.ifC.condition, 
           retrievedInstruction.ifC.quantityInstructions, retrievedInstruction.ifC.intructions); //Mas e se o if já tiver instruções? Não esta passando elas no construtor
 
-          console.log(ifInstance)
-
-        // for (let currentInstruction of retrievedInstruction.ifC.intructions) {
-        //   if (currentInstruction) {
-        //     let command;
-            
-        //     if (currentInstruction.type === "variable") {
-        //       // Se o tipo de instrução for "variable", crie uma instância de NewVariable
-        //       command = new NewVariable(currentInstruction.newVariable.name, currentInstruction.newVariable.value);
-        //       // Adicione a instância de NewVariable a ifInstance
-        //       const instruction = this.buildInstruction(currentInstruction.type, command, false);
-
-        //       if (instruction !== undefined) {
-        //         console.log("OI")
-        //         ifInstance.setInstructions(instruction);
-        //       }               
-        //     }else if(currentInstruction.type === "variablemanipulatorVariable"){
-        //       // Se o tipo de instrução for "variable", crie uma instância de NewVariable
-        //       command = new VariableHandler(currentInstruction.name, currentInstruction.manipulation, currentInstruction.value);
-        //       // Adicione a instância de NewVariable a ifInstance
-        //       const instruction = this.buildInstruction(currentInstruction.type, command, false);
-
-        //       if (instruction !== undefined) {
-        //         console.log("OI")
-        //         ifInstance.setInstructions(instruction);
-        //       }               
-        //     }else if(currentInstruction.type === "paint"){
-        //       // Se o tipo de instrução for "variable", crie uma instância de NewVariable
-        //       command = new Paint(currentInstruction.valX, currentInstruction.valY);
-        //       // Adicione a instância de NewVariable a ifInstance
-        //       const instruction = this.buildInstruction(currentInstruction.type, command, false);
-
-        //       if (instruction !== undefined) {
-        //         console.log("OI")
-        //         ifInstance.setInstructions(instruction);
-        //       }               
-        //     }
-        //   } 
-        // }
-        
-        console.log(retrievedInstruction)
-        console.log(instructionBuild)
-
-
         instructionInstance = new Instruction("if", undefined, undefined, undefined, ifInstance, undefined, retrievedInstruction.positionX, retrievedInstruction.positionY);
-
-        console.log(instructionInstance)
 
         //Adiciona instrução no SE ou ENQUANTO
         if(instructionInstance.ifC)
         instructionInstance.ifC.setInstructions(instructionBuild);
-
-        console.log(instructionInstance)
 
         instructionList[instructionList.length-1] = instructionInstance;
         
@@ -199,43 +155,11 @@ console.log("oi")
 
       }else if(instructionList[instructionList.length-1].type == 'for'){
         retrievedInstruction = instructionList[instructionList.length-1]
+
         forInstance = new For(retrievedInstruction.forC.valX, retrievedInstruction.forC.valY, retrievedInstruction.forC.condition, 
-        retrievedInstruction.forC.quantityInstructions);
+          retrievedInstruction.forC.quantityInstructions, retrievedInstruction.forC.intructions); //Mas e se o if já tiver instruções? Não esta passando elas no construtor
 
-        for (let currentInstruction of retrievedInstruction.forC.intructions) {
-          if (currentInstruction) {
-            let command;
-            if (currentInstruction.type === "variable") {
-              // Se o tipo de instrução for "variable", crie uma instância de NewVariable
-              command = new NewVariable(currentInstruction.newVariable.name, currentInstruction.newVariable.value);
-              // Adicione a instância de NewVariable a ifInstance
-              const instruction = this.buildInstruction(currentInstruction.type, command, false);
-              if (instruction !== undefined) {
-                forInstance.setInstructions(instruction);
-              }
-            }else if(currentInstruction.type === "variablemanipulatorVariable"){
-              // Se o tipo de instrução for "variable", crie uma instância de NewVariable
-              command = new VariableHandler(currentInstruction.name, currentInstruction.manipulation, currentInstruction.value);
-              // Adicione a instância de NewVariable a ifInstance
-              const instruction = this.buildInstruction(currentInstruction.type, command, false);
-
-              if (instruction !== undefined) {
-                forInstance.setInstructions(instruction);
-              }               
-            }else if(currentInstruction.type === "paint"){
-              // Se o tipo de instrução for "variable", crie uma instância de NewVariable
-              command = new Paint(currentInstruction.valX, currentInstruction.valY);
-              // Adicione a instância de NewVariable a ifInstance
-              const instruction = this.buildInstruction(currentInstruction.type, command, false);
-
-              if (instruction !== undefined) {
-                forInstance.setInstructions(instruction);
-              }               
-            }
-          }
-        }
-
-        instructionInstance = new Instruction("for", undefined, undefined, undefined, undefined, forInstance);
+        instructionInstance = new Instruction("for", undefined, undefined, undefined, undefined, forInstance, retrievedInstruction.positionX, retrievedInstruction.positionY);
 
         //Adiciona instrução no SE ou ENQUANTO
         if(instructionInstance.forC)
@@ -298,19 +222,12 @@ console.log("oi")
         currentInstruction = instructionList[instructionList.length-1];
 
         if(currentInstruction.type == 'if'){
-          console.log(currentInstruction.ifC.intructions)
-          if(currentInstruction.ifC.intructions.length == 0){
-            console.log(currentInstruction.ifC.intructions)
 
+          if(currentInstruction.ifC.intructions.length == 0){
             instruction.positionY = currentInstruction.positionY + 100
           }else{
-            console.log(currentInstruction.ifC.intructions)
-
-            instruction.positionY = currentInstruction.ifC.intructions[currentInstruction.ifC.intructions.length-1].positionY + 100
+            instruction.positionY = currentInstruction.ifC.intructions[currentInstruction.ifC.intructions.length-1].positionY + 100  
           }
-          console.log(currentInstruction.ifC.intructions)
-
-          console.log(instruction)
         }else if(currentInstruction.type == 'for'){
           if(currentInstruction.forC.intructions.length == 0){
             instruction.positionY = currentInstruction.positionY + 100
@@ -319,14 +236,13 @@ console.log("oi")
           }
         }
       }
-      if(instruction.type == 'variable' || instruction.type == 'variablemanipulatorVariable' || instruction.type == 'paint'){
-        instruction.positionX = 120
-      }else if(instruction.type == 'if' || instruction.type == 'for'){
-        instruction.positionX = 400
-      } 
-      console.log(currentInstruction.ifC.intructions)
 
-      console.log(instruction)
+      if(!this.hasReachedLimit(false, instructionList)){
+        instruction.positionX = 120
+      }else{
+        instruction.positionX = 310
+      } 
+
     }else{
 
       if(!instructionList){
@@ -335,9 +251,6 @@ console.log("oi")
         currentInstruction = instructionList[instructionList.length-1];
         instruction.positionY = currentInstruction.positionY + 100
       }
-
-
-      console.log(instruction)
 
       if(instruction.type == 'variable' || instruction.type == 'variablemanipulatorVariable' || instruction.type == 'paint'){
         instruction.positionX = 310
