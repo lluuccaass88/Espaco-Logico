@@ -121,6 +121,17 @@ export class BuildComands{
             fontStyle: 'bold'
           });
         break;
+        case 'customForOrIf':
+          return new Konva.default.Text({
+            x: posX,
+            y: posY,
+            text: customText,
+            fontSize: 15,
+            fontFamily: 'Arial',
+            fill: 'white',
+            fontStyle: 'bold'
+          });
+        break;
       }  
 
       return new Konva.default.Text({

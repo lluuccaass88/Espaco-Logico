@@ -17,26 +17,32 @@ export class InstructionService {
     let isFirt
 
     if (storedList) { 
+      console.log("upi")
       instructionList = JSON.parse(storedList)
+
       isFirt = false;
       variableToSave = this.buildInstruction(type, instruction, isFirt);
     } else {
-      instructionList = [];
+      console.log("upi")
       isFirt = true;
       variableToSave = this.buildInstruction(type, instruction, true);
     }
 
     if(isFirt){
+      console.log("oi")
       this.setPosition(variableToSave, false)
       instructionList.push(variableToSave)  
     } else if(!this.hasReachedLimit(isFirt, JSON.parse(storedList))){  // se for o primeiro, se não for do tipo "if", se o numero de instruções dentro do if for menor que a quantidade definida
+      console.log("oi")
       this.setPosition(variableToSave, true)
       this.linkInstructions(variableToSave, instructionList);
     }else if(JSON.parse(storedList)[JSON.parse(storedList).length - 1].type == 'if' 
       || JSON.parse(storedList)[JSON.parse(storedList).length - 1].type == 'for'){
+        console.log("oi")
         this.setPosition(variableToSave, true)
         instructionList.push(variableToSave)  
     }else{
+      console.log("oi")
       this.setPosition(variableToSave, false)
       instructionList.push(variableToSave)  
     }
@@ -159,11 +165,17 @@ export class InstructionService {
         forInstance = new For(retrievedInstruction.forC.valX, retrievedInstruction.forC.valY, retrievedInstruction.forC.condition, 
           retrievedInstruction.forC.quantityInstructions, retrievedInstruction.forC.intructions); //Mas e se o if já tiver instruções? Não esta passando elas no construtor
 
+          console.log(instructionList)
+
         instructionInstance = new Instruction("for", undefined, undefined, undefined, undefined, forInstance, retrievedInstruction.positionX, retrievedInstruction.positionY);
+
+          console.log(instructionInstance)
 
         //Adiciona instrução no SE ou ENQUANTO
         if(instructionInstance.forC)
         instructionInstance.forC.setInstructions(instructionBuild);
+
+        console.log(instructionInstance)
 
         instructionList[instructionList.length-1] = instructionInstance;
         

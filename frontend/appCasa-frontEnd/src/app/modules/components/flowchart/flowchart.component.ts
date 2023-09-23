@@ -17,11 +17,14 @@ export class FlowchartComponent {
 
   ngAfterViewInit() {
     const self = this;
+    console.log(self.instructionList[self.instructionList.length - 1])
+
+    const heightCanva = self.instructionList[self.instructionList.length - 1].positionY + 500
 
     const stage = new Konva.default.Stage({
       container: 'containerCanvaFlowchart',
       width: 800,
-      height: 800,
+      height: heightCanva,
     });
 
     const layer = new Konva.default.Layer();
@@ -32,6 +35,10 @@ export class FlowchartComponent {
     for (const currentInstruction of self.instructionList) {
       let newInstruction: any;
       let newText: any;
+      let newTextVal1: any
+      let newTextCondition: any
+      let newTextVal2: any
+
 
       let startComponent = this.buildComands.buildStartAndFinish(310, 3);
       newText = this.buildComands.buildText(370, 22, 'custom', `Inicio`);
@@ -70,7 +77,7 @@ export class FlowchartComponent {
       if(currentInstruction.type == 'if'){
         console.log(currentInstruction)
         newInstruction = this.buildComands.builfIf(currentInstruction.positionX, currentInstruction.positionY)
-        newText = this.buildComands.buildText(currentInstruction.positionX - 12, currentInstruction.positionY - 10, 'custom', `SE ${currentInstruction.ifC.valX} ${currentInstruction.ifC.condition} ${currentInstruction.ifC.valX}`);
+        newText = this.buildComands.buildText(currentInstruction.positionX - 27, currentInstruction.positionY - 30, 'customForOrIf', `   SE \n ${currentInstruction.ifC.valX} \n     ${currentInstruction.ifC.condition} \n ${currentInstruction.ifC.valX}`);
         layer.add(newInstruction);
         layer.add(newText);
 
@@ -102,24 +109,53 @@ export class FlowchartComponent {
             layer.add(newText);
           }
         }
-
-
       }
-
 
       if(currentInstruction.type == 'for'){
         newInstruction = this.buildComands.buildFor(currentInstruction.positionX, currentInstruction.positionY)
-        newText = this.buildComands.buildText(currentInstruction.positionX - 12, currentInstruction.positionY - 10, 'custom', `ENQUANTO ${currentInstruction.forC.valX} for ${currentInstruction.forC.condition} de ${currentInstruction.forC.valX}`);
+        newTextVal1 = this.buildComands.buildText(currentInstruction.positionX - 45, currentInstruction.positionY - 25, 'customForOrIf', `ENQUANTO \n     ${currentInstruction.forC.valX} \n        ${currentInstruction.forC.condition} \n     ${currentInstruction.forC.valX}`);
+        // newTextCondition = this.buildComands.buildText(currentInstruction.positionX - 45, currentInstruction.positionY - 25, 'customForOrIf', `ENQUANTO \n ${currentInstruction.forC.valX} for \n ${currentInstruction.forC.condition} \n ${currentInstruction.forC.valX}`);
+        // newTextVal2 = this.buildComands.buildText(currentInstruction.positionX - 45, currentInstruction.positionY - 25, 'customForOrIf', `ENQUANTO \n ${currentInstruction.forC.valX} for \n ${currentInstruction.forC.condition} \n ${currentInstruction.forC.valX}`);
         layer.add(newInstruction);
-        layer.add(newText);
+        layer.add(newTextVal1);
+        // layer.add(newTextCondition);
+        // layer.add(newTextVal2);
+
+        for (const currentArrayInstruction of currentInstruction.forC.intructions) {
+          if(currentArrayInstruction.type == 'variable'){
+            newInstruction = this.buildComands.buildComand(currentArrayInstruction.positionX, currentArrayInstruction.positionY) 
+            if(!newInstruction.value){
+              console.log(newInstruction)
+              newText = this.buildComands.buildText(currentArrayInstruction.positionX + 55, currentArrayInstruction.positionY + 24, 'custom', `${currentArrayInstruction.newVariable.name} = ${currentInstruction.newVariable.value}`);
+            }else{
+              newText = this.buildComands.buildText(currentArrayInstruction.positionX + 55, currentArrayInstruction.positionY + 24, 'custom', `${currentArrayInstruction.newVariable.name}`);
+            }
+            layer.add(newInstruction);
+            layer.add(newText);
+          }
+    
+          if(currentArrayInstruction.type == 'variablemanipulatorVariable'){
+            newInstruction = this.buildComands.buildComand(currentArrayInstruction.positionX, currentArrayInstruction.positionY)
+            newText = this.buildComands.buildText(currentArrayInstruction.positionX + 55, currentArrayInstruction.positionY + 24, 'custom', `${currentArrayInstruction.variableHandler.name} ${currentArrayInstruction.variableHandler.manipulation} ${currentArrayInstruction.variableHandler.value}`);
+            layer.add(newInstruction);
+            layer.add(newText);
+          }
+       
+          if(currentArrayInstruction.type == 'paint'){
+            newInstruction = this.buildComands.buildComand(currentArrayInstruction.positionX, currentArrayInstruction.positionY)
+            newText = this.buildComands.buildText(currentArrayInstruction.positionX + 45, currentArrayInstruction.positionY + 24, 'custom', `Pinte (${currentArrayInstruction.paint.valX}, ${currentArrayInstruction.paint.valY})`);
+            layer.add(newInstruction);
+            layer.add(newText);
+          }
+        }
       }
 
       console.log(currentInstruction);
     }
     
     
-    let finishtComponent = this.buildComands.buildStartAndFinish(310, 709);
-    let newText = this.buildComands.buildText(375, 728, 'custom', `FIM`); //Fazer de forma dinamica
+    let finishtComponent = this.buildComands.buildStartAndFinish(310, heightCanva - 200);
+    let newText = this.buildComands.buildText(380, heightCanva - 180, 'custom', `FIM`); //Fazer de forma dinamica
     layer.add(finishtComponent);
     layer.add(newText);
 

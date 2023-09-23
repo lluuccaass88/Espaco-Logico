@@ -7,10 +7,12 @@
         <p class="titleLow">Condição:</p>
         <select class="dropdown-input" name="conditionInput" placeholder="Escolha seu papel" [(ngModel)]="condition">
             <option value="" disabled selected> </option>
-            <option value="maior-igual">maior igual</option>
-            <option value="menor-igual">menor igual</option>
-            <option value="igual">igual</option>
-            <option value="diferente">diferente</option>
+            <option value="<">maior</option>
+            <option value=">">menor</option>
+            <option value="<=">maior igual</option>
+            <option value=">=">menor igual</option>
+            <option value="==">igual</option>
+            <option value="!=">diferente</option>
           </select>
 
         <p class="titleLow">Valor de Y:</p>
@@ -21,4 +23,4 @@
         <p class="error, paragraph" *ngIf="showError">{{errorMesage}}</p>
         <button class="button button-text" (click)="addNewComand()">Adicionar</button>
     </form>
-</div>\
+</div>
