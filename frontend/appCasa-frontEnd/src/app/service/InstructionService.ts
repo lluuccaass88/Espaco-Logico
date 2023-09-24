@@ -1,11 +1,20 @@
+import { Injectable } from "@angular/core";
 import { For } from "../model/instruction/For";
 import { If } from "../model/instruction/If";
 import { Instruction } from "../model/instruction/Instruction";
 import { NewVariable } from "../model/instruction/NewVariable";
 import { Paint } from "../model/instruction/Paint";
 import { VariableHandler } from "../model/instruction/VariableHandler";
+import { ApiInstructionService } from "./ApiInstructionService";
+
+@Injectable({
+  providedIn: 'root' // Indica que este serviço está disponível no nível raiz
+})
 
 export class InstructionService {
+
+  constructor(private apiInstructionService: ApiInstructionService){}
+
   public addInstruction(type: string, instruction: any): void {
     console.log("===================== INICIO ==========================")
     // - limpa localstorage
@@ -51,6 +60,13 @@ export class InstructionService {
     console.log(instructionList)
   
     localStorage.setItem('instructionList', JSON.stringify(instructionList));
+
+    this.apiInstructionService.newInstruction(instructionList).subscribe(res => {
+      console.log(res)
+    });
+
+
+
 
     //Into será apagado no futuro
     let storedListAtual: any | undefined = localStorage.getItem('instructionList');
@@ -109,29 +125,80 @@ export class InstructionService {
   let instructionList: Array<Instruction> = [];
   const storedList: any | undefined = localStorage.getItem('instructionList');
   instructionList = JSON.parse(storedList)
+  const userId = localStorage.getItem('authToken');
+
+    console.log("OIOI")
 
   if(type == 'variable'){
-    resultInstruction = new Instruction(type, instructionPreBuild);
+    resultInstruction = new Instruction(
+      type, 
+      instructionPreBuild,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      userId);
     this.setId(isFirt, resultInstruction, instructionList);
   }
   if(type == 'variablemanipulatorVariable'){
     this.setId(isFirt, resultInstruction,instructionList);
-    resultInstruction = new Instruction(type, undefined, instructionPreBuild);
+    resultInstruction = new Instruction(
+      type, 
+      undefined, 
+      instructionPreBuild,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      userId);
   }
 
   if(type == 'paint'){
     this.setId(isFirt, resultInstruction, instructionList);
-    resultInstruction = new Instruction(type, undefined, undefined, instructionPreBuild);
+    resultInstruction = new Instruction(
+      type, 
+      undefined, 
+      undefined, 
+      instructionPreBuild,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      userId
+      );
   }
 
   if(type == 'if') {
     this.setId(isFirt, resultInstruction, instructionList);
-    resultInstruction = new Instruction(type, undefined, undefined, undefined, instructionPreBuild);
+    resultInstruction = new Instruction(
+      type, 
+      undefined, 
+      undefined, 
+      undefined, 
+      instructionPreBuild,
+      undefined,
+      undefined,
+      undefined,
+      userId);
 }
   if(type == 'for'){
     this.setId(isFirt, resultInstruction, instructionList);
-    resultInstruction = new Instruction(type, undefined, undefined, undefined, undefined, instructionPreBuild);
+    resultInstruction = new Instruction(
+      type, 
+      undefined, 
+      undefined, 
+      undefined, 
+      undefined, 
+      instructionPreBuild, 
+      undefined,
+      undefined,
+      userId);
 }
+
+  console.log(resultInstruction)
   return resultInstruction;
   }
 
@@ -140,6 +207,7 @@ export class InstructionService {
     let ifInstance: If;
     let forInstance: For;
     let instructionInstance: Instruction;
+    const userId = localStorage.getItem('authToken');
 
     if(instructionList)
       if(instructionList[instructionList.length-1].type == 'if'){
@@ -147,6 +215,8 @@ export class InstructionService {
 
         ifInstance = new If(retrievedInstruction.ifC.valX, retrievedInstruction.ifC.valY, retrievedInstruction.ifC.condition, 
           retrievedInstruction.ifC.quantityInstructions, retrievedInstruction.ifC.intructions); //Mas e se o if já tiver instruções? Não esta passando elas no construtor
+
+          console.log(retrievedInstruction)
 
         instructionInstance = new Instruction("if", undefined, undefined, undefined, ifInstance, undefined, retrievedInstruction.positionX, retrievedInstruction.positionY);
 

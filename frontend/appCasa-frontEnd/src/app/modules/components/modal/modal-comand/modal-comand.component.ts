@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { InputValidator } from 'src/app/service/utils/InputValidator';
 import { InstructionService } from 'src/app/service/InstructionService';
 
@@ -14,6 +14,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./modal-comand.component.css']
 })
 export class ModalComandComponent {
+  @Input() variavelCompartilhada: number | undefined;
+  @Output() variavelCompartilhadaChange: EventEmitter<number> = new EventEmitter<number>();
+
   showError: boolean = false;
   errorMesage:String | undefined;
 
@@ -72,6 +75,9 @@ export class ModalComandComponent {
       let newVariable:NewVariable = new NewVariable(this.variableName, this.variableValue)
       this.instructionService.addInstruction('variable', newVariable);
     }
+
+    this.variavelCompartilhada = 10;
+    this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
   }
 
   public addNewManipulateVariable():void{
@@ -101,6 +107,9 @@ export class ModalComandComponent {
       let variableHandler:VariableHandler = new VariableHandler(this.variableName, this.manipulationVariable, this.valueManipulation)
       this.instructionService.addInstruction('manipulatorVariable', variableHandler);
     }
+
+    this.variavelCompartilhada = 10;
+    this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
   }
 
   public addNewPaint(){
@@ -111,6 +120,9 @@ export class ModalComandComponent {
       let paint:Paint = new Paint(this.valX, this.valY)
       this.instructionService.addInstruction('paint', paint);
     }
+
+    this.variavelCompartilhada = 10;
+    this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
   }
 
   public startWithValue(){

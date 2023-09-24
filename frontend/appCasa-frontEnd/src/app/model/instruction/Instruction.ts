@@ -6,12 +6,12 @@ import { VariableHandler } from "./VariableHandler";
 
 export class Instruction {
 
+    userId?: String;
     idInstruction?:number;
     type?: string;
     positionX?: number;
     positionY?: number;
     previous?: number;
-
     newVariable?: NewVariable
     variableHandler?: VariableHandler
     paint?: Paint
@@ -19,7 +19,7 @@ export class Instruction {
     forC?: For
 
     constructor(type?: string, newVariabele?: NewVariable, variableHandler?: VariableHandler, paint?: Paint,
-        newIf?: If, newFor?: For, positionX?: number, positionY?: number){
+        newIf?: If, newFor?: For, positionX?: number, positionY?: number, userId?: String | null){
         this.type = type;
         this.newVariable = newVariabele;
         this.variableHandler = variableHandler;
@@ -29,6 +29,8 @@ export class Instruction {
         this.forC = newFor;
         this.positionX = positionX;
         this.positionY = positionY;
+        if(userId)
+            this.userId = userId;
     }
 
     public setIdInstruction(idInstruction:number){

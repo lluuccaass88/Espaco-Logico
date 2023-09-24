@@ -12,9 +12,9 @@
           <!-- Conteúdo da segunda coluna -->
           <!-- <p>Segunda coluna (70% da tela)</p> -->
           <app-flowchart *ngIf="showModal==10"></app-flowchart>
-          <app-modal-comand *ngIf="showModal==0"></app-modal-comand>
-          <app-modal-if *ngIf="showModal==1"></app-modal-if>
-          <app-modal-for *ngIf="showModal==2"></app-modal-for>
+          <app-modal-comand *ngIf="showModal==0" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-comand>
+          <app-modal-if *ngIf="showModal==1" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-if>
+          <app-modal-for *ngIf="showModal==2" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-for>
 
         </div>
       </div>      

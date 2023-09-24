@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { InputValidator } from 'src/app/service/utils/InputValidator';
 import { InstructionService } from 'src/app/service/InstructionService';
 import { Instruction } from 'src/app/model/instruction/Instruction';
@@ -12,6 +12,9 @@ import { For } from 'src/app/model/instruction/For';
   styleUrls: ['./modal-for.component.css']
 })
 export class ModalForComponent {
+  @Input() variavelCompartilhada: number | undefined;
+  @Output() variavelCompartilhadaChange: EventEmitter<number> = new EventEmitter<number>();
+
   showError: boolean = false;
   errorMesage: string | undefined;
 
@@ -64,5 +67,7 @@ export class ModalForComponent {
       this.instructionService.addInstruction('for', newFor);
     }
 
+    this.variavelCompartilhada = 10;
+    this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
   }
 }

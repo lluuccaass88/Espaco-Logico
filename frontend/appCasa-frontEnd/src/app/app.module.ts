@@ -23,6 +23,7 @@ import { ModalForComponent } from './modules/components/modal/modal-for/modal-fo
 import { PdfViewerModule } from 'ng2-pdf-viewer'; // <- import PdfViewerModule
 import { PdfRenderComponent } from './modules/game/pdf-render/pdf-render.component';
 import { FlowchartComponent } from './modules/components/flowchart/flowchart.component';
+import { ApiInstructionService } from './service/ApiInstructionService';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { FlowchartComponent } from './modules/components/flowchart/flowchart.com
   ],
   providers: [
     ApiService,
+    ApiInstructionService,
     InstructionService,
     InputValidator,
     BuildComands

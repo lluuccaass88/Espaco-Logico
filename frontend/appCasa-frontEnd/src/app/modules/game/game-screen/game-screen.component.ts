@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { BuildComands } from '../../components/BuildComands';
 import * as Konva from 'konva';
 
@@ -8,6 +8,8 @@ import * as Konva from 'konva';
   styleUrls: ['./game-screen.component.css']
 })
 export class GameScreenComponent {
+  @Output() showModalChange: EventEmitter<number> = new EventEmitter<number>();
+
   showModal:number = 10;
 
   constructor(private buildComands: BuildComands) {}
@@ -87,6 +89,7 @@ export class GameScreenComponent {
 
     comandComponent.on('click', function () {
       self.showModal = 0
+      self.showModalChange.emit(self.showModal)
     });    
     comandTextComponent.on('click', ()=>{
       self.showModal = 0
