@@ -65,9 +65,10 @@ export class ModalForComponent {
     if(contValidationSuccess == 0){
       let newFor:For = new For(this.valX, this.valY, this.condition, this.quantityInstructions)
       this.instructionService.addInstruction('for', newFor);
+      this.variavelCompartilhada = 10;
+      this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
     }
 
-    this.variavelCompartilhada = 10;
-    this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
+
   }
 }

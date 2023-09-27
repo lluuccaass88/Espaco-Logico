@@ -74,10 +74,11 @@ export class ModalComandComponent {
     if(contValidationSuccess == 0){
       let newVariable:NewVariable = new NewVariable(this.variableName, this.variableValue)
       this.instructionService.addInstruction('variable', newVariable);
+      this.variavelCompartilhada = 10;
+      this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
     }
 
-    this.variavelCompartilhada = 10;
-    this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
+
   }
 
   public addNewManipulateVariable():void{
@@ -106,10 +107,9 @@ export class ModalComandComponent {
     if(contValidationSuccess == 0){
       let variableHandler:VariableHandler = new VariableHandler(this.variableName, this.manipulationVariable, this.valueManipulation)
       this.instructionService.addInstruction('manipulatorVariable', variableHandler);
+      this.variavelCompartilhada = 10;
+      this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
     }
-
-    this.variavelCompartilhada = 10;
-    this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
   }
 
   public addNewPaint(){
@@ -119,10 +119,10 @@ export class ModalComandComponent {
     }else{
       let paint:Paint = new Paint(this.valX, this.valY)
       this.instructionService.addInstruction('paint', paint);
+      this.variavelCompartilhada = 10;
+      this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
     }
 
-    this.variavelCompartilhada = 10;
-    this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
   }
 
   public startWithValue(){

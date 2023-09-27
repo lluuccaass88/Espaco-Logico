@@ -9,8 +9,16 @@ import * as Konva from 'konva';
 })
 export class GameScreenComponent {
   @Output() showModalChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() showErrorMessageInstruction: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() errorMessageInstruction: EventEmitter<String> = new EventEmitter<String>();
+  
 
   showModal:number = 10;
+  showErrorMessage: boolean = false;
+  errorMessage: string = '';
+  
+
+  // errorMessage: string = 'lal';
 
   constructor(private buildComands: BuildComands) {}
   
