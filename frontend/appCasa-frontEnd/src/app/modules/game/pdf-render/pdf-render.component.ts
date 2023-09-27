@@ -12,6 +12,6 @@ export class PdfRenderComponent {
 constructor( private router: Router){}
 
   public backHandler(){
-    this.router.navigate(['/pdfView']);
+    this.router.navigate(['/game']);
   }
 }

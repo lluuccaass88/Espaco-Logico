@@ -11,6 +11,7 @@ import { HomePageComponent } from './modules/auth/home-page/home-page.component'
 import { GameScreenComponent } from './modules/game/game-screen/game-screen.component';
 import { HomeStudentComponent } from './modules/game/home-student/home-student.component';
 import { PdfRenderComponent } from './modules/game/pdf-render/pdf-render.component';
+import { GameIntroductionComponent } from './modules/game/game-introduction/game-introduction.component';
 
 import { AuthGuard } from './service/utils/AuthGuard';
 
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'home', component: HomeStudentComponent, canActivate: [AuthGuard] },
   { path: 'game', component: GameScreenComponent, canActivate: [AuthGuard] },
-  { path: 'pdfView', component: PdfRenderComponent, canActivate: [AuthGuard] }
+  { path: 'pdfView', component: PdfRenderComponent, canActivate: [AuthGuard] },
+  { path: 'introduction', component: GameIntroductionComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

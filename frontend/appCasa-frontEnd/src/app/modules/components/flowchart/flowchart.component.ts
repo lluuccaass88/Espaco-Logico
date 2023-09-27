@@ -77,7 +77,7 @@ export class FlowchartComponent {
       if(currentInstruction.type == 'if'){
         console.log(currentInstruction)
         newInstruction = this.buildComands.builfIf(currentInstruction.positionX, currentInstruction.positionY)
-        newText = this.buildComands.buildText(currentInstruction.positionX - 27, currentInstruction.positionY - 30, 'customForOrIf', `   SE \n ${currentInstruction.ifC.valX} \n     ${currentInstruction.ifC.condition} \n ${currentInstruction.ifC.valX}`);
+        newText = this.buildComands.buildText(currentInstruction.positionX - 27, currentInstruction.positionY - 30, 'customForOrIf', `   SE \n ${currentInstruction.ifC.valX} \n     ${currentInstruction.ifC.condition} \n ${currentInstruction.ifC.valY}`);
         layer.add(newInstruction);
         layer.add(newText);
 

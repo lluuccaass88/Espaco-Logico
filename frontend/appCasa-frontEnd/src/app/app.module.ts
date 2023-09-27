@@ -24,6 +24,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer'; // <- import PdfViewerModule
 import { PdfRenderComponent } from './modules/game/pdf-render/pdf-render.component';
 import { FlowchartComponent } from './modules/components/flowchart/flowchart.component';
 import { ApiInstructionService } from './service/ApiInstructionService';
+import { GameIntroductionComponent } from './modules/game/game-introduction/game-introduction.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ApiInstructionService } from './service/ApiInstructionService';
     ModalIfComponent,
     ModalForComponent,
     PdfRenderComponent,
-    FlowchartComponent
+    FlowchartComponent,
+    GameIntroductionComponent
   ],
   imports: [
     BrowserModule,

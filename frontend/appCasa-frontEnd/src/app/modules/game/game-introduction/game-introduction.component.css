@@ -1,0 +1,57 @@
+.container {
+    display: flex;
+    justify-content: end; /* Alinha horizontalmente ao centro */
+    padding-left: 5%;
+    height: 90vh; /* Altura total da viewport */
+  }
+
+.subtitle-container{ 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.paragraph{
+    color: black;
+    text-align: left;
+    font-weight: 600; /* Um pouco menos negrito do que "bold" */
+}
+  
+  .button-container {
+    margin-left: 30px; 
+  }
+  
+  .paragraph-container{
+    width: 90%;
+  }
+
+  .button{
+    width: 110px;
+  }
+
+  .introduction-container{
+    text-align: left;
+    position: relative; 
+    margin-bottom: 30px;
+}
+
+  .personagem{
+    height: 250%;
+    position: absolute; 
+    top: -185px; 
+    left: 30px; 
+    }
+
+.images-container{
+    margin-bottom: 5%;
+}
+
+.button-info{
+    padding: 20px;
+    width: 200px;
+    margin-bottom: 50%;
+}

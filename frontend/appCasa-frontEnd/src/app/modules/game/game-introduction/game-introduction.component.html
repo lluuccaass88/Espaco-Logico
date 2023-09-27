@@ -1,0 +1,23 @@
+<div class="container">
+    <div  *ngIf="cont==1 || cont==2 || cont==4" class="images-container">
+       <img *ngIf="cont==1" src="../../../../assets/images/planeta.png" alt=""> 
+       <img *ngIf="cont==2" src="../../../../assets/images/nucleoBomba.png" alt=""> 
+       <button *ngIf="cont==4"  (click)="handleviewPdf()" type="submit" class="button button-text button-info">ACESSAR INFORMAÇÕES</button>
+    </div>
+    <div class="introduction-container">
+            <img class="personagem" src="../../../../assets/images/personagem1.png" alt="">
+        <div class="subtitle-container">
+            <div class="paragraph-container">
+                <p class="paragraph">
+                    {{dialogue}}
+                </p>
+            </div>
+    
+          <div class="button-container">
+            <button (click)="handleNextDialogue()" type="submit" class="button button-text">Próximo</button>
+          </div>  
+        </div>
+    </div>
+
+  </div>
+  
