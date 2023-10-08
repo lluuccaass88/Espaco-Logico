@@ -5,7 +5,7 @@ export class If{
     valY?: number | string;
     condition?: string
     quantityInstructions: number = 5;
-    intructions: Instruction[] = [];
+    instructions: Instruction[] = [];
 
     constructor(valX?: number | string, valY?: number | string, condition?: string, 
         quantityInstructions?: number, instructions?: any){
@@ -15,10 +15,10 @@ export class If{
         if(quantityInstructions)
         this.quantityInstructions = quantityInstructions;
         if(instructions)
-        this.intructions = instructions;
+        this.instructions = instructions;
     }
 
     public setInstructions(instruction: Instruction){
-        this.intructions?.push(instruction);
+        this.instructions?.push(instruction);
     }
 }

@@ -25,6 +25,9 @@ import { PdfRenderComponent } from './modules/game/pdf-render/pdf-render.compone
 import { FlowchartComponent } from './modules/components/flowchart/flowchart.component';
 import { ApiInstructionService } from './service/ApiInstructionService';
 import { GameIntroductionComponent } from './modules/game/game-introduction/game-introduction.component';
+import { GameTestComponent } from './modules/game/game-test/game-test.component';
+import { ApiLevelService } from './service/ApiLevelService';
+import { LevelService } from './service/LevelService';
 
 
 @NgModule({
@@ -41,7 +44,8 @@ import { GameIntroductionComponent } from './modules/game/game-introduction/game
     ModalForComponent,
     PdfRenderComponent,
     FlowchartComponent,
-    GameIntroductionComponent
+    GameIntroductionComponent,
+    GameTestComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,9 @@ import { GameIntroductionComponent } from './modules/game/game-introduction/game
     ApiInstructionService,
     InstructionService,
     InputValidator,
-    BuildComands
+    BuildComands,
+    ApiLevelService, 
+    LevelService
   ],
   bootstrap: [AppComponent]
 })

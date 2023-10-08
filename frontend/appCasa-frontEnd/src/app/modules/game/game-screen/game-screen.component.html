@@ -1,5 +1,4 @@
 <div class="container">
-   
     <div class="split-screen">
         <div class="column-left">
           <!-- Conteúdo da primeira coluna -->
@@ -9,12 +8,26 @@
           <div id="containerCanva"></div>
         </div>
         <div class="column-right">
+          <button (click)="testAlgorithm()" class="button button-text" >Testar</button>
           <!-- Conteúdo da segunda coluna -->
           <!-- <p>Segunda coluna (70% da tela)</p> -->
           <app-flowchart *ngIf="showModal==10"></app-flowchart>
           <app-modal-comand *ngIf="showModal==0" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-comand>
           <app-modal-if *ngIf="showModal==1" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-if>
           <app-modal-for *ngIf="showModal==2" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-for>
+
+          <div *ngIf="showModal==10" class="question-container">
+        <div class="text-container">
+                <p class="titleLow">
+                  Desáfio:
+                </p>
+                <p class="paragraph">
+                  {{questionLevel}}  
+                  <!-- instrução do level instrução do level instrução do level instrução do level instrução do level -->
+                </p>
+        
+        </div>
+    </div>
 
         </div>
       </div>      

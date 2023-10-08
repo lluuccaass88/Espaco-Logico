@@ -17,8 +17,7 @@ export class InstructionService {
 
   public addInstruction(type: string, instruction: any): void {
     console.log("===================== INICIO ==========================")
-    // - limpa localstorage
-    // localStorage.removeItem('instructionList') 
+
 
     let instructionList: Array<Instruction> = [];
     const storedList: any | undefined = localStorage.getItem('instructionList'); 
@@ -66,9 +65,7 @@ export class InstructionService {
     });
 
 
-
-
-    //Into será apagado no futuro
+    //Isto será apagado no futuro
     let storedListAtual: any | undefined = localStorage.getItem('instructionList');
     console.log('Mostra estado atual da lista de instructions')
     console.log(JSON.parse(storedListAtual))
@@ -142,7 +139,7 @@ export class InstructionService {
       userId);
     this.setId(isFirt, resultInstruction, instructionList);
   }
-  if(type == 'variablemanipulatorVariable'){
+  if(type == 'manipulatorVariable'){
     this.setId(isFirt, resultInstruction,instructionList);
     resultInstruction = new Instruction(
       type, 
@@ -214,11 +211,12 @@ export class InstructionService {
         retrievedInstruction = instructionList[instructionList.length-1]
 
         ifInstance = new If(retrievedInstruction.ifC.valX, retrievedInstruction.ifC.valY, retrievedInstruction.ifC.condition, 
-          retrievedInstruction.ifC.quantityInstructions, retrievedInstruction.ifC.intructions); //Mas e se o if já tiver instruções? Não esta passando elas no construtor
+          retrievedInstruction.ifC.quantityInstructions, retrievedInstruction.ifC.instructions); //Mas e se o if já tiver instruções? Não esta passando elas no construtor
 
           console.log(retrievedInstruction)
 
-        instructionInstance = new Instruction("if", undefined, undefined, undefined, ifInstance, undefined, retrievedInstruction.positionX, retrievedInstruction.positionY);
+        instructionInstance = new Instruction("if", undefined, undefined, undefined, ifInstance, undefined, 
+          retrievedInstruction.positionX, retrievedInstruction.positionY, retrievedInstruction.userId);
 
         //Adiciona instrução no SE ou ENQUANTO
         if(instructionInstance.ifC)
@@ -233,11 +231,12 @@ export class InstructionService {
         retrievedInstruction = instructionList[instructionList.length-1]
 
         forInstance = new For(retrievedInstruction.forC.valX, retrievedInstruction.forC.valY, retrievedInstruction.forC.condition, 
-          retrievedInstruction.forC.quantityInstructions, retrievedInstruction.forC.intructions); //Mas e se o if já tiver instruções? Não esta passando elas no construtor
+          retrievedInstruction.forC.quantityInstructions, retrievedInstruction.forC.instructions); //Mas e se o if já tiver instruções? Não esta passando elas no construtor
 
           console.log(instructionList)
 
-        instructionInstance = new Instruction("for", undefined, undefined, undefined, undefined, forInstance, retrievedInstruction.positionX, retrievedInstruction.positionY);
+        instructionInstance = new Instruction("for", undefined, undefined, undefined, undefined, forInstance, 
+          retrievedInstruction.positionX, retrievedInstruction.positionY, retrievedInstruction.userId);
 
           console.log(instructionInstance)
 
@@ -276,14 +275,14 @@ export class InstructionService {
 
     if(retrievedInstruction.type == 'if'){
 
-      if(retrievedInstruction.ifC.quantityInstructions > retrievedInstruction.ifC.intructions.length){
+      if(retrievedInstruction.ifC.quantityInstructions > retrievedInstruction.ifC.instructions.length){
         return false
       }else{
         return true
       }
     }else if(retrievedInstruction.type == 'for'){
 
-      if(retrievedInstruction.forC.quantityInstructions > retrievedInstruction.forC.intructions.length){
+      if(retrievedInstruction.forC.quantityInstructions > retrievedInstruction.forC.instructions.length){
         return false
       }else{
         return true
@@ -305,16 +304,16 @@ export class InstructionService {
 
         if(currentInstruction.type == 'if'){
 
-          if(currentInstruction.ifC.intructions.length == 0){
+          if(currentInstruction.ifC.instructions.length == 0){
             instruction.positionY = currentInstruction.positionY + 100
           }else{
-            instruction.positionY = currentInstruction.ifC.intructions[currentInstruction.ifC.intructions.length-1].positionY + 100  
+            instruction.positionY = currentInstruction.ifC.instructions[currentInstruction.ifC.instructions.length-1].positionY + 100  
           }
         }else if(currentInstruction.type == 'for'){
-          if(currentInstruction.forC.intructions.length == 0){
+          if(currentInstruction.forC.instructions.length == 0){
             instruction.positionY = currentInstruction.positionY + 100
           }else{
-            instruction.positionY = currentInstruction.forC.intructions[currentInstruction.forC.intructions.length-1].positionY + 100
+            instruction.positionY = currentInstruction.forC.instructions[currentInstruction.forC.instructions.length-1].positionY + 100
           }
         }
       }
@@ -334,7 +333,7 @@ export class InstructionService {
         instruction.positionY = currentInstruction.positionY + 100
       }
 
-      if(instruction.type == 'variable' || instruction.type == 'variablemanipulatorVariable' || instruction.type == 'paint'){
+      if(instruction.type == 'variable' || instruction.type == 'manipulatorVariable' || instruction.type == 'paint'){
         instruction.positionX = 310
       }else if(instruction.type == 'if' || instruction.type == 'for'){
         instruction.positionX = 400
@@ -348,6 +347,29 @@ export class InstructionService {
 
   }
 
+  // public async testAlgorithm(){
+  //   const storedList: any | undefined = localStorage.getItem('instructionList'); 
+  //   let response: any | undefined;
+
+  //   (await this.apiInstructionService.testInstruction(JSON.parse(storedList))).subscribe(res=> {
+  //     console.log(res)
+
+
+
+  //     response = res;
+  //      console.log(response)
+  //   })
+   
+  //   return response;
+  // }
+
+
+  public async testAlgorithm(): Promise<any> {
+    const storedList: any | undefined = localStorage.getItem('instructionList');
+    const response = await (await this.apiInstructionService.testInstruction(JSON.parse(storedList))).toPromise();
+    console.log(response);
+    return response;
+  }
 
 }
 

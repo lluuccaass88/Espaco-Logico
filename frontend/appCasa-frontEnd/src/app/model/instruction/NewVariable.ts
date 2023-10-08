@@ -1,6 +1,6 @@
 export class NewVariable{
     name?:string;
-    value?:number;
+    value?:number = 0;
 
     constructor(name?: string, value?: number){
         this.name = name;

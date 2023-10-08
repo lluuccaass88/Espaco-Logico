@@ -18,7 +18,6 @@ export class LoginComponent {
   showErrorMessage: boolean = false;
   errorMessage: string = '';
 
-
   public onLogin() {
     if (this.verfForm()) {
       let data = {

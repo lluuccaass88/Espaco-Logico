@@ -14,6 +14,7 @@ import { PdfRenderComponent } from './modules/game/pdf-render/pdf-render.compone
 import { GameIntroductionComponent } from './modules/game/game-introduction/game-introduction.component';
 
 import { AuthGuard } from './service/utils/AuthGuard';
+import { GameTestComponent } from './modules/game/game-test/game-test.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'home', component: HomeStudentComponent, canActivate: [AuthGuard] },
   { path: 'game', component: GameScreenComponent, canActivate: [AuthGuard] },
   { path: 'pdfView', component: PdfRenderComponent, canActivate: [AuthGuard] },
-  { path: 'introduction', component: GameIntroductionComponent, canActivate: [AuthGuard] }
+  { path: 'introduction', component: GameIntroductionComponent, canActivate: [AuthGuard] },
+  { path: 'test', component: GameTestComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

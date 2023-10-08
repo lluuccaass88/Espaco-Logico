@@ -23,7 +23,7 @@ export class FlowchartComponent {
 
     const stage = new Konva.default.Stage({
       container: 'containerCanvaFlowchart',
-      width: 800,
+      width: 500,
       height: heightCanva,
     });
 
@@ -58,7 +58,7 @@ export class FlowchartComponent {
       }
 
 
-      if(currentInstruction.type == 'variablemanipulatorVariable'){
+      if(currentInstruction.type == 'manipulatorVariable'){
         newInstruction = this.buildComands.buildComand(currentInstruction.positionX, currentInstruction.positionY)
         newText = this.buildComands.buildText(currentInstruction.positionX + 55, currentInstruction.positionY + 24, 'custom', `${currentInstruction.variableHandler.name} ${currentInstruction.variableHandler.manipulation} ${currentInstruction.variableHandler.value}`);
         layer.add(newInstruction);
@@ -82,7 +82,7 @@ export class FlowchartComponent {
         layer.add(newText);
 
 
-        for (const currentArrayInstruction of currentInstruction.ifC.intructions) {
+        for (const currentArrayInstruction of currentInstruction.ifC.instructions) {
           if(currentArrayInstruction.type == 'variable'){
             newInstruction = this.buildComands.buildComand(currentArrayInstruction.positionX, currentArrayInstruction.positionY) 
             if(!newInstruction.value){
@@ -95,7 +95,7 @@ export class FlowchartComponent {
             layer.add(newText);
           }
     
-          if(currentArrayInstruction.type == 'variablemanipulatorVariable'){
+          if(currentArrayInstruction.type == 'manipulatorVariable'){
             newInstruction = this.buildComands.buildComand(currentArrayInstruction.positionX, currentArrayInstruction.positionY)
             newText = this.buildComands.buildText(currentArrayInstruction.positionX + 55, currentArrayInstruction.positionY + 24, 'custom', `${currentArrayInstruction.variableHandler.name} ${currentArrayInstruction.variableHandler.manipulation} ${currentArrayInstruction.variableHandler.value}`);
             layer.add(newInstruction);
@@ -121,7 +121,7 @@ export class FlowchartComponent {
         // layer.add(newTextCondition);
         // layer.add(newTextVal2);
 
-        for (const currentArrayInstruction of currentInstruction.forC.intructions) {
+        for (const currentArrayInstruction of currentInstruction.forC.instructions) {
           if(currentArrayInstruction.type == 'variable'){
             newInstruction = this.buildComands.buildComand(currentArrayInstruction.positionX, currentArrayInstruction.positionY) 
             if(!newInstruction.value){
@@ -134,7 +134,7 @@ export class FlowchartComponent {
             layer.add(newText);
           }
     
-          if(currentArrayInstruction.type == 'variablemanipulatorVariable'){
+          if(currentArrayInstruction.type == 'manipulatorVariable'){
             newInstruction = this.buildComands.buildComand(currentArrayInstruction.positionX, currentArrayInstruction.positionY)
             newText = this.buildComands.buildText(currentArrayInstruction.positionX + 55, currentArrayInstruction.positionY + 24, 'custom', `${currentArrayInstruction.variableHandler.name} ${currentArrayInstruction.variableHandler.manipulation} ${currentArrayInstruction.variableHandler.value}`);
             layer.add(newInstruction);
@@ -159,28 +159,6 @@ export class FlowchartComponent {
     layer.add(finishtComponent);
     layer.add(newText);
 
-    // let comandComponent = this.buildComands.buildStartAndFinish(310, 3);
-
-    // let comandIf = this.buildComands.buildFor(400, 170)
-    
-    
-    // let comandComponentIf1 = this.buildComands.buildComand(120, 250, true);
-
-    // let comandComponentIf2 = this.buildComands.buildComand(120, 350, true);
-    // let comandComponentIf3 = this.buildComands.buildComand(120, 450, true);
-
-    // let comandComponent2 = this.buildComands.buildComand(310, 550);
-
-    // let comandComponent3 = this.buildComands.buildStartAndFinish(310, 650);
-
-
-    // layer.add(comandComponent);
-    // layer.add(comandIf)
-    // layer.add(comandComponentIf1)
-    // layer.add(comandComponentIf2)
-    // layer.add(comandComponentIf3)
-    // layer.add(comandComponent2)
-    // layer.add(comandComponent3)
     stage.draw();
 
   }

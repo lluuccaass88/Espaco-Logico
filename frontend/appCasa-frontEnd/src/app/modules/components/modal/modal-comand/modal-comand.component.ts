@@ -31,7 +31,7 @@ export class ModalComandComponent {
   showDefineValue:Boolean = false;
 
   variableName:string | undefined;
-  manipulationVariable: number | undefined;
+  manipulationVariable: string | undefined;
   valueManipulation:number | undefined;
 
   valX: number | undefined;
@@ -94,7 +94,7 @@ export class ModalComandComponent {
 
     if(!this.variableName && !this.manipulationVariable && !this.valueManipulation){
       this.showError = true
-      this.errorMesage = "Nem um capo pode estar em branco."
+      this.errorMesage = "Nem um campo pode estar em branco."
       contValidationSuccess++
     }
 

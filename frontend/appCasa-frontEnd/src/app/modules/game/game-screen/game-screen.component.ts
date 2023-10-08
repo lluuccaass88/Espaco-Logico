@@ -1,6 +1,10 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { BuildComands } from '../../components/BuildComands';
 import * as Konva from 'konva';
+import { InstructionService } from 'src/app/service/InstructionService';
+import { Router } from '@angular/router';
+import { LevelService } from 'src/app/service/LevelService';
+import { Level } from 'src/app/model/Level';
 
 @Component({
   selector: 'app-game-screen',
@@ -16,15 +20,20 @@ export class GameScreenComponent {
   showModal:number = 10;
   showErrorMessage: boolean = false;
   errorMessage: string = '';
-  
+  level?: Level;
+  questionLevel?: string
 
-  // errorMessage: string = 'lal';
+  constructor(private buildComands: BuildComands, private instructionService: InstructionService, 
+      private router: Router, private levelService: LevelService) {}
 
-  constructor(private buildComands: BuildComands) {}
-  
-
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
+        // - limpa localstorage
+    // localStorage.removeItem('instructionList') 
     const self = this;
+    let respTest: any
+
+    respTest = await (await self.findCurrentLevel());
+     self.questionLevel = respTest[0].question
 
     const stage = new Konva.default.Stage({
       container: 'containerCanva',
@@ -117,6 +126,18 @@ export class GameScreenComponent {
       self.showModal = 2
     })
 
+  }
+
+  public testAlgorithm(){
+    this.instructionService.testAlgorithm()
+    this.router.navigate(['/test']);
+  }
+
+  public async findCurrentLevel(){
+    const userId = localStorage.getItem('authToken');
+    const response = (await this.levelService.getLevel(userId))
+
+    return response
   }
 
 }
