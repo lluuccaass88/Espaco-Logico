@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import Konva from 'konva';
 import { InstructionService } from 'src/app/service/InstructionService';
+import { LevelService } from 'src/app/service/LevelService';
 
 @Component({
   selector: 'app-game-test',
@@ -9,23 +10,32 @@ import { InstructionService } from 'src/app/service/InstructionService';
   styleUrls: ['./game-test.component.css']
 })
 export class GameTestComponent {
-  constructor (private instructionService: InstructionService, private router: Router) {}
+  constructor (private instructionService: InstructionService, private router: Router, private levelService: LevelService) {}
 
-  public nextPhase() {
-    this.router.navigate(['/test']);
+  correcAnswer?: boolean
+
+  public async nextPhase() {
+    // localStorage.removeItem('instructionList') 
+    //Requisição para aumentar o level do usuário
+
+
+    await (await this.levelService.nextLevel(localStorage.getItem('authToken')))
+
+    this.router.navigate(['/game']);
   }
 
   public tryAgain() {
-    this.router.navigate(['/test']);
+    this.router.navigate(['/game']);
   }
 
   async ngAfterViewInit() {
     const self = this;
 
     let algorithm: any = []
-    algorithm = await (this.instructionService.testAlgorithm())
+    let checkAnswer: Boolean;
 
-    console.log(algorithm)
+    algorithm = await (this.instructionService.testAlgorithm())
+    self.correcAnswer = await (this.instructionService.checkAlgorithm(algorithm))
 
     const stage = new Konva.Stage({
       container: 'containerCanva',

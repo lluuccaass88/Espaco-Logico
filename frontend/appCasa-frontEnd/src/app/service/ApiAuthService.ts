@@ -20,13 +20,13 @@ export class ApiService {
 
   register(data: any): Observable<any> {
     console.log("Enviando registro de novo usuário")
-    const url = `${this.URL_SERVER}/auth/register`;
+    const url = `${this.URL_SERVER}/user/register`;
     return this.http.post(url, data);
   }
 
   signIn(data: any): Observable<any> {
     console.log("Enviando pedido de login")
-    const url = `${this.URL_SERVER}/auth/authenticate`;
+    const url = `${this.URL_SERVER}/user/authenticate`;
     return this.http.post(url, data);
   }
 
@@ -41,5 +41,7 @@ export class ApiService {
       return false;
     }
   }
+
+
 
 }

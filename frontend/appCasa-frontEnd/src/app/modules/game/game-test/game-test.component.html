@@ -1,8 +1,8 @@
 <div class="container">
         <p class="titleLarge">Teste do algoritimo</p>
         <div class="color" id="containerCanva"></div>
-        <button (click)="nextPhase()" class="button button-text" >Próxima fase</button>
-        <button (click)="tryAgain()" class="button button-text fail" >Tentar novamente</button>
+        <button *ngIf="correcAnswer==true" (click)="nextPhase()" class="button button-text" >Próxima fase</button>
+        <button *ngIf="correcAnswer==false" (click)="tryAgain()" class="button button-text fail" >Tentar novamente</button>
 </div>
 
 <!-- (click)="testAlgorithm()" -->

@@ -347,26 +347,15 @@ export class InstructionService {
 
   }
 
-  // public async testAlgorithm(){
-  //   const storedList: any | undefined = localStorage.getItem('instructionList'); 
-  //   let response: any | undefined;
-
-  //   (await this.apiInstructionService.testInstruction(JSON.parse(storedList))).subscribe(res=> {
-  //     console.log(res)
-
-
-
-  //     response = res;
-  //      console.log(response)
-  //   })
-   
-  //   return response;
-  // }
-
-
   public async testAlgorithm(): Promise<any> {
-    const storedList: any | undefined = localStorage.getItem('instructionList');
+    const storedList: any = localStorage.getItem('instructionList');
     const response = await (await this.apiInstructionService.testInstruction(JSON.parse(storedList))).toPromise();
+    console.log(response);
+    return response;
+  }
+
+  public async checkAlgorithm(algorithm: any): Promise<any> {
+    const response = await (await this.apiInstructionService.checkInstruction(localStorage.getItem('authToken'), algorithm)).toPromise();
     console.log(response);
     return response;
   }

@@ -27,7 +27,7 @@
     font-size: 140%;
   }
 
-  .button{
+  .buttonTest{
     width: 15%;
     font-size: 20px;
     padding: 5px;
@@ -55,4 +55,10 @@
 .text-container{
   margin: 15px;
   width: 90%;
+}
+
+.buttonRemove{
+  font-size: 20px;
+  padding: 5px;
+  margin-top: 60px;
 }

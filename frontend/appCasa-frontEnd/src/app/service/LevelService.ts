@@ -14,7 +14,19 @@ export class LevelService {
     const response = await (await this.apiLevelService.getLevelById(user_id))
     console.log(response);
     return response;
+  }
 
+  
+  async nextLevel(user_id: any){
+    try{
+      console.log(user_id)
+      const response = await (await this.apiLevelService.nextLevel(user_id))
+      console.log(response);
+      return response;
+    }catch(error){
+      console.log("LevelService - " + error)
+    }
+    
   }
 
 }

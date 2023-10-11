@@ -6,9 +6,11 @@
           <!-- <comand-component> </comand-component>
           <app-if-component> </app-if-component> -->
           <div id="containerCanva"></div>
+          <button (click)="removelastInstruction()" class="button button-text buttonRemove" >Remover</button>
+
         </div>
         <div class="column-right">
-          <button (click)="testAlgorithm()" class="button button-text" >Testar</button>
+          <button (click)="testAlgorithm()" class="button button-text buttonTest" >Testar</button>
           <!-- Conteúdo da segunda coluna -->
           <!-- <p>Segunda coluna (70% da tela)</p> -->
           <app-flowchart *ngIf="showModal==10"></app-flowchart>
@@ -16,14 +18,14 @@
           <app-modal-if *ngIf="showModal==1" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-if>
           <app-modal-for *ngIf="showModal==2" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-for>
 
-          <div *ngIf="showModal==10" class="question-container">
+          <div class="question-container">
         <div class="text-container">
                 <p class="titleLow">
                   Desáfio:
                 </p>
                 <p class="paragraph">
-                  {{questionLevel}}  
-                  <!-- instrução do level instrução do level instrução do level instrução do level instrução do level -->
+                  <!-- {{currentLevel.question}}   -->
+                  instrução do level instrução do level instrução do level instrução do level instrução do level
                 </p>
         
         </div>

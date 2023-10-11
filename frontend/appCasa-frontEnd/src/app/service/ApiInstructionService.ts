@@ -30,4 +30,15 @@ export class ApiInstructionService {
     const response = await this.http.post(url, data).toPromise();
     return of(response); 
   }
+
+  async checkInstruction(user_id: any, algorithm: any): Promise<Observable<any>> {
+    console.log("Check algorithm");
+    const data = {
+      user_id: user_id,
+      algorithm: algorithm
+    }
+    const url = `${this.URL_SERVER}/instruction/checkAlgorithm`;
+    const response = await this.http.post(url, data).toPromise();
+    return of(response); 
+  }
 }

@@ -30,10 +30,11 @@ export class GameScreenComponent {
         // - limpa localstorage
     // localStorage.removeItem('instructionList') 
     const self = this;
-    let respTest: any
+    let currentLevel: any
 
-    respTest = await (await self.findCurrentLevel());
-     self.questionLevel = respTest[0].question
+    //DESCOMENTAR DPS
+    // currentLevel = await (await self.findCurrentLevel());
+    //  self.questionLevel = currentLevel[0].question
 
     const stage = new Konva.default.Stage({
       container: 'containerCanva',
@@ -138,6 +139,10 @@ export class GameScreenComponent {
     const response = (await this.levelService.getLevel(userId))
 
     return response
+  }
+
+  public async removelastInstruction(){
+    
   }
 
 }

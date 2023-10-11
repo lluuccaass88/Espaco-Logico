@@ -29,4 +29,16 @@ export class ApiLevelService {
         }
       }
 
+      async nextLevel(user_id: any): Promise<any> {
+        try {
+          const url = `${this.URL_SERVER}/user/nextLevel`;
+          const response = await this.http.post(url, { user_id }).toPromise();
+          return response;
+        } catch (error) {
+          console.error("LevelService - Error:", error);
+          throw error; // Lançando o erro para que o chamador possa lidar com ele, se necessário.
+        }
+      }
+      
+
 }
