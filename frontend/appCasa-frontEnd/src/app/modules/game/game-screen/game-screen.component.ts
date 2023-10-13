@@ -32,7 +32,7 @@ export class GameScreenComponent {
     const self = this;
     let currentLevel: any
 
-    //DESCOMENTAR DPS
+    //DESCOMENTAR DPS - passar de nivel
     // currentLevel = await (await self.findCurrentLevel());
     //  self.questionLevel = currentLevel[0].question
 
@@ -142,7 +142,8 @@ export class GameScreenComponent {
   }
 
   public async removelastInstruction(){
-    
+    this.instructionService.removeLastInstruction()
+    // console.log("oi")
   }
 
 }

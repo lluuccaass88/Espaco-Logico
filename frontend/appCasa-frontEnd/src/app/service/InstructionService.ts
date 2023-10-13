@@ -20,37 +20,36 @@ export class InstructionService {
 
 
     let instructionList: Array<Instruction> = [];
-    const storedList: any | undefined = localStorage.getItem('instructionList'); 
+    // const storedList: any | undefined = localStorage.getItem('instructionList'); 
     let variableToSave: any|undefined
-    let isFirt
+    let isFirst
+
+    const storedList: any | undefined = localStorage.getItem('instructionList'); 
 
     if (storedList) { 
-      console.log("upi")
+      //Transforma o conteudo do salvo no localstorage em um objeto JSON
       instructionList = JSON.parse(storedList)
-
-      isFirt = false;
-      variableToSave = this.buildInstruction(type, instruction, isFirt);
+      if(instruction.length == 0){
+        isFirst = true
+      }
+      isFirst = false;
+      variableToSave = this.buildInstruction(type, instruction, isFirst);
     } else {
-      console.log("upi")
-      isFirt = true;
+      isFirst = true;
       variableToSave = this.buildInstruction(type, instruction, true);
     }
 
-    if(isFirt){
-      console.log("oi")
+    if(isFirst){
       this.setPosition(variableToSave, false)
       instructionList.push(variableToSave)  
-    } else if(!this.hasReachedLimit(isFirt, JSON.parse(storedList))){  // se for o primeiro, se não for do tipo "if", se o numero de instruções dentro do if for menor que a quantidade definida
-      console.log("oi")
+    } else if(!this.hasReachedLimit(isFirst, JSON.parse(storedList))){  // se for o primeiro, se não for do tipo "if", se o numero de instruções dentro do if for menor que a quantidade definida
       this.setPosition(variableToSave, true)
       this.linkInstructions(variableToSave, instructionList);
     }else if(JSON.parse(storedList)[JSON.parse(storedList).length - 1].type == 'if' 
       || JSON.parse(storedList)[JSON.parse(storedList).length - 1].type == 'for'){
-        console.log("oi")
         this.setPosition(variableToSave, true)
         instructionList.push(variableToSave)  
     }else{
-      console.log("oi")
       this.setPosition(variableToSave, false)
       instructionList.push(variableToSave)  
     }
@@ -265,32 +264,42 @@ export class InstructionService {
 
   private hasReachedLimit(isFirt?: boolean, instructionList?: Array<Instruction>): boolean{
     let retrievedInstruction: any | undefined;
-
-    if(isFirt){ 
+    //Se for a primeira instrução da lista retorna true
+    if(isFirt)
       return true
+    //Verifica se a lista não esta vazia
+    if(instructionList){
+      //Adiciona a ultima posição da lista na variável retrievedInstruction
+      retrievedInstruction = instructionList[instructionList.length-1]
     }
-
-    if(instructionList)
-    retrievedInstruction = instructionList[instructionList.length-1]
-
+    //Verifica se o tipo da ultima instrução da lista é igual a if
     if(retrievedInstruction.type == 'if'){
-
+      /*
+       Verifica se a quantidade máxima de itens que foram definidos pelo usuário é maior
+       que a quantidade de instruções já atreladas a esta.
+      */
       if(retrievedInstruction.ifC.quantityInstructions > retrievedInstruction.ifC.instructions.length){
+        //Caso seja retorna false
         return false
       }else{
+        //Caso não seja retorna true
         return true
       }
-    }else if(retrievedInstruction.type == 'for'){
-
+    }else if(retrievedInstruction.type == 'for'){ //Verifica se o tipo da ultima instrução da lista é igual a for
+      /*
+       Verifica se a quantidade máxima de itens que foram definidos pelo usuário é maior
+       que a quantidade de instruções já atreladas a esta.
+      */
       if(retrievedInstruction.forC.quantityInstructions > retrievedInstruction.forC.instructions.length){
+        //Caso seja retorna false
         return false
       }else{
+        //Caso não seja retorna true
         return true
       }
     }else{
       return true;
     }
-
   }
 
   private setPosition(instruction?: any, isIfOrFor?: boolean){
@@ -298,14 +307,13 @@ export class InstructionService {
     let instructionList = JSON.parse(storedList)
     let currentInstruction;
 
+    //Verifica se é do tipo for ou if
     if(isIfOrFor){
-      if(instructionList){
-        currentInstruction = instructionList[instructionList.length-1];
-
-        if(currentInstruction.type == 'if'){
-
-          if(currentInstruction.ifC.instructions.length == 0){
-            instruction.positionY = currentInstruction.positionY + 100
+      if(instructionList){ //Verifica se a instruction list não é vazia
+        currentInstruction = instructionList[instructionList.length-1]; //currentInstruction resebe a ultima posiçao do array
+        if(currentInstruction.type == 'if'){ //Verifica se o tipo da instrução é if
+          if(currentInstruction.ifC.instructions.length == 0){ //Verifica se o array de instruções tem tamanho 0
+            instruction.positionY = currentInstruction.positionY + 100 //Atribui 
           }else{
             instruction.positionY = currentInstruction.ifC.instructions[currentInstruction.ifC.instructions.length-1].positionY + 100  
           }
@@ -358,6 +366,32 @@ export class InstructionService {
     const response = await (await this.apiInstructionService.checkInstruction(localStorage.getItem('authToken'), algorithm)).toPromise();
     console.log(response);
     return response;
+  }
+
+  public removeLastInstruction(){
+   let instructionList: Array<Instruction> = [];
+    const storedList: any | undefined = localStorage.getItem('instructionList'); 
+    let variableToSave: any|undefined
+
+    if (storedList) { 
+      instructionList = JSON.parse(storedList)
+
+      instructionList.pop();
+
+    localStorage.setItem('instructionList', JSON.stringify(instructionList));
+
+    this.apiInstructionService.newInstruction(instructionList).subscribe(res => {
+      console.log(res)
+    });
+
+    if(instructionList.length == 0){
+      localStorage.removeItem('instructionList') 
+    }
+
+      return true
+    } else {
+      return "Nenhuma instrulção encontrada para deletar"
+    }
   }
 
 }

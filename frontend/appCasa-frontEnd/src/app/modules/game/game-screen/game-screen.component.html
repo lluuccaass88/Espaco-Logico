@@ -18,7 +18,7 @@
           <app-modal-if *ngIf="showModal==1" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-if>
           <app-modal-for *ngIf="showModal==2" [variavelCompartilhada]="showModal" (variavelCompartilhadaChange)="showModal = $event"></app-modal-for>
 
-          <div class="question-container">
+          <div *ngIf="showModal==10" class="question-container">
         <div class="text-container">
                 <p class="titleLow">
                   Desáfio:
