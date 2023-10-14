@@ -311,41 +311,41 @@ export class InstructionService {
     if(isIfOrFor){
       if(instructionList){ //Verifica se a instruction list não é vazia
         currentInstruction = instructionList[instructionList.length-1]; //currentInstruction resebe a ultima posiçao do array
+        //Atribui na posição y da nova instrução o valor da posição Y da ultima instrução + 100
+        instruction.positionY = currentInstruction.positionY + 100  
         if(currentInstruction.type == 'if'){ //Verifica se o tipo da instrução é if
-          if(currentInstruction.ifC.instructions.length == 0){ //Verifica se o array de instruções tem tamanho 0
-            instruction.positionY = currentInstruction.positionY + 100 //Atribui 
-          }else{
+          if(currentInstruction.ifC.instructions.length != 0){ //Verifica se o array de instruções tem tamanho diferente de 0
+            //Atribui na nova instrução o valor da posição Y da ultima instrução atrelada ao if
             instruction.positionY = currentInstruction.ifC.instructions[currentInstruction.ifC.instructions.length-1].positionY + 100  
           }
-        }else if(currentInstruction.type == 'for'){
-          if(currentInstruction.forC.instructions.length == 0){
-            instruction.positionY = currentInstruction.positionY + 100
-          }else{
+        }else if(currentInstruction.type == 'for'){ //Verifica se o tipo da instrução é for
+          if(currentInstruction.forC.instructions.length != 0){//Verifica se o array de instruções tem tamanho diferente de 0
+            //Atribui na nova instrução o valor da posição Y da ultima instrução atrelada ao if
             instruction.positionY = currentInstruction.forC.instructions[currentInstruction.forC.instructions.length-1].positionY + 100
           }
         }
       }
-
-      if(!this.hasReachedLimit(false, instructionList)){
-        instruction.positionX = 120
+      //Verifica se o limite de instruções que podem ser atreladas a esta foi atingido
+      if(!this.hasReachedLimit(false, instructionList)){ 
+        instruction.positionX = 120 //Atribui para a posição x da nova instrução o valor 120
       }else{
-        instruction.positionX = 310
+        instruction.positionX = 310 //Atribui para a posição x da nova instrução o valor 120
       } 
-
-    }else{
-
-      if(!instructionList){
-        instruction.positionY = 100
-      }else{
-        currentInstruction = instructionList[instructionList.length-1];
-        instruction.positionY = currentInstruction.positionY + 100
+    }else{ //Caso a instrução não seja do tipo for ou if
+      if(!instructionList){ //Verifica se a instructions list esta vazia
+        instruction.positionY = 100 //Atribui para a posição y na nova instrução o valor de 100;
+      }else{ //Se não estiver vazia
+        currentInstruction = instructionList[instructionList.length-1]; //currentInstruction resebe a ultima posiçao do array
+        //Atribui na posição y da nova instrução o valor da posição Y da ultima instrução + 100
+        instruction.positionY = currentInstruction.positionY + 100 
       }
-
+      //Verifica se o tipo da nova instrução é igual a variable, manipulatorVariable ou paint
       if(instruction.type == 'variable' || instruction.type == 'manipulatorVariable' || instruction.type == 'paint'){
-        instruction.positionX = 310
+        instruction.positionX = 310 //atribui a posição X da nova instrução o valor de 310
+      //Verifica se o tipo da nova instrução é igual a if ou for
       }else if(instruction.type == 'if' || instruction.type == 'for'){
-        instruction.positionX = 400
-        instruction.positionY = instruction.positionY + 60
+        instruction.positionX = 400 //atribui a posição X da nova instrução o valor de 310
+        instruction.positionY = instruction.positionY + 60 //atribui a posição y o seu valor mais 60
       }
     }
 

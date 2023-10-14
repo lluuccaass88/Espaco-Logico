@@ -28,6 +28,7 @@ import { GameIntroductionComponent } from './modules/game/game-introduction/game
 import { GameTestComponent } from './modules/game/game-test/game-test.component';
 import { ApiLevelService } from './service/ApiLevelService';
 import { LevelService } from './service/LevelService';
+import { MenuComponent } from './modules/components/menu/menu.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { LevelService } from './service/LevelService';
     PdfRenderComponent,
     FlowchartComponent,
     GameIntroductionComponent,
-    GameTestComponent
+    GameTestComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

@@ -66,11 +66,11 @@ export class BuildComands{
 
     buildFor(posX:number, posY:number): Shape<ShapeConfig>{
       return new Konva.default.RegularPolygon({
-        x: posX,
-        y: posY,
-        sides: 6,
-        radius: 70,
-        fill: 'red'
+        x: posX, //Define posição X
+        y: posY, //Define posição Y
+        sides: 6, //Numero de lados do poligono
+        radius: 70, //Configuração referente ao tamanho
+        fill: 'red' //Cor do poligono
       });
       
     }

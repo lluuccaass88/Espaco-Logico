@@ -1,0 +1,39 @@
+.menu {
+    background-color: black;
+    border-bottom: 2px solid green;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    color: white;
+    width: 100%;
+  }
+  
+  .right span {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+  }
+  
+  .left img {
+    cursor: pointer;
+    max-height: 25%;
+    max-width: 25%;
+    margin-right: 10px;
+    margin-left: 20px;
+  }
+  
+  .left span {
+    cursor: pointer;
+    margin-right: 60px;
+  }
+
+  
+  .right span:hover {
+    text-decoration: underline;
+  }
+  
+  .titleLow{
+    font-size: 160%;
+  }

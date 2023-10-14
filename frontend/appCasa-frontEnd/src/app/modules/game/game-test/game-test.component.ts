@@ -15,6 +15,7 @@ export class GameTestComponent {
   correcAnswer?: boolean
 
   public async nextPhase() {
+    //DESCOMENTAR DEPOIS
     // localStorage.removeItem('instructionList') 
     //Requisição para aumentar o level do usuário
 
@@ -83,12 +84,7 @@ export class GameTestComponent {
     console.log(algorithm)
 
     if(algorithm){
-      for(const currentStriction of algorithm){
-
-        console.log(currentStriction[0])
-        console.log(currentStriction[1])
-  
-  
+      for(const currentStriction of algorithm){  
         const cell = new Konva.Rect({
           x: spacing * currentStriction[1] - cellSize, // Posição x da célula
           y: spacing * currentStriction[0] - cellSize, // Posição y da célula
@@ -100,7 +96,28 @@ export class GameTestComponent {
       }
     }
 
-    stage.add(layer);
+    if (algorithm) {
+      // Verifica se a variável "algorithm" não é nula
+      for (const currentStriction of algorithm) {
+        // Inicia um loop foreach para percorrendo todo o array algorithm
+        const cell = new Konva.Rect({ // Cria uma nova instância de um retângulo da biblioteca Konva 
+          // Define a posição x da célula com base na multiplicação do valor "spacing" pela segunda parte do elemento atual em "algorithm" e subtrai "cellSize"          
+          x: spacing * currentStriction[1] - cellSize,
+          // Define a posição y da célula com base na multiplicação do valor "spacing" pela primeira parte do elemento atual em "algorithm" e subtrai "cellSize"
+          y: spacing * currentStriction[0] - cellSize,
+          // Define a largura da célula como "cellSize"
+          width: cellSize,
+          // Define a altura da célula como "cellSize"
+          height: cellSize,
+          // Define a cor de preenchimento da célula como 'green' (verde)
+          fill: 'green',
+        });
+        // Adiciona o retângulo "cell" à camada (layer) do Konva
+        layer.add(cell);
+      }
+    }
+    
 
+    stage.add(layer);
   }
 }

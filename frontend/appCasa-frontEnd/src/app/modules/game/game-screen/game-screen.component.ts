@@ -33,8 +33,10 @@ export class GameScreenComponent {
     let currentLevel: any
 
     //DESCOMENTAR DPS - passar de nivel
-    // currentLevel = await (await self.findCurrentLevel());
-    //  self.questionLevel = currentLevel[0].question
+    currentLevel = await (await self.findCurrentLevel());
+    self.questionLevel = currentLevel[0].question
+
+
 
     const stage = new Konva.default.Stage({
       container: 'containerCanva',
