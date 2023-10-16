@@ -13,4 +13,8 @@ export class HomeStudentComponent {
     this.router.navigate(['/introduction']);
   }
 
+  public handleContinue(){
+    this.router.navigate(['/game']);
+  }
+
 }

@@ -17,10 +17,17 @@ export class MenuComponent {
   
 
   async ngAfterViewInit() {
-    console.log("Começou")
-    if(localStorage.getItem('authToken')){
-      this.showDownload = true;
-      this.showDownload = true;
+    let token = localStorage.getItem('authToken')
+    let user: any = localStorage.getItem('user')
+
+    if(user)
+      user = JSON.parse(user)
+
+    if(token){
+      this.showLogout = true;
+        if(user.user_role == 'professor'){
+          this.showDownload = true;
+        }
     }
   }
 
@@ -30,8 +37,9 @@ export class MenuComponent {
     this.router.navigate(['/']);
   }
 
-  public download(){
-
+  public download(){ 
+    window.open('../../../../assets/roles/atividades.pdf', '_blank');
+  
   }
 
   public backToStart(){

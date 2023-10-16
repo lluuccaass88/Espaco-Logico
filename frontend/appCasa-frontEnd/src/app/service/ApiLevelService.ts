@@ -22,6 +22,7 @@ export class ApiLevelService {
         const url = `${this.URL_SERVER}/level/getLevel/${id}`;
         try {
           const response = await this.http.get(url).toPromise();
+          console.log(response)
           return response;
         } catch (error) {
           // Trate erros aqui, por exemplo, lançando um erro personalizado

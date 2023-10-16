@@ -13,6 +13,7 @@ import { HomeStudentComponent } from './modules/game/home-student/home-student.c
 import { PdfRenderComponent } from './modules/game/pdf-render/pdf-render.component';
 import { GameIntroductionComponent } from './modules/game/game-introduction/game-introduction.component';
 
+
 import { AuthGuard } from './service/utils/AuthGuard';
 import { GameTestComponent } from './modules/game/game-test/game-test.component';
 

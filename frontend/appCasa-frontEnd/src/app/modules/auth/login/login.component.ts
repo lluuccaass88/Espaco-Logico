@@ -15,6 +15,7 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   token: String = '';
+  user?: any;
   showErrorMessage: boolean = false;
   errorMessage: string = '';
 
@@ -27,9 +28,11 @@ export class LoginComponent {
 
       this.apiService.signIn(data).subscribe(res => {
         this.token = res.token
+        this.user = res.user
 
         if(this.token != ''){
           localStorage.setItem('authToken', this.token.toString());
+          localStorage.setItem('user', JSON.stringify(this.user));
           this.router.navigate(['/home']);
         }else{
           this.router.navigate(['/home']);

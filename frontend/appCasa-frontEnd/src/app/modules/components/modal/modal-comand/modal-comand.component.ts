@@ -113,15 +113,42 @@ export class ModalComandComponent {
   }
 
   public addNewPaint(){
-    if(!this.inputValidator.isNumeric(this.valX) || !this.inputValidator.isNumeric(this.valY)){
-      this.showError = true;
-      this.errorMesage = "Apenas números são aceitos."
-    }else{
+    // if(!this.inputValidator.isNumeric(this.valX) || !this.inputValidator.isNumeric(this.valY)){
+    //   this.showError = true;
+    //   this.errorMesage = "Apenas números são aceitos."
+    // }else{
+    //   let paint:Paint = new Paint(this.valX, this.valY)
+    //   this.instructionService.addInstruction('paint', paint);
+    //   this.variavelCompartilhada = 10;
+    //   this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
+    // }
+
+    let contValidationSuccess = 0;
+
+
+    if(!this.inputValidator.isNumeric(this.valX)){
+      if(!this.instructionService.variableExists(this.valX)){
+        this.showError = true
+        this.errorMesage = "A váriavel digitada no campo valX não foi previamente declarada."
+        contValidationSuccess++
+      }    
+    }
+
+    if(!this.inputValidator.isNumeric(this.valY)){
+      if(!this.instructionService.variableExists(this.valY)){
+        this.showError = true
+        this.errorMesage = "A váriavel digitada no campo valY não foi previamente declarada."
+        contValidationSuccess++
+      }    
+    }
+
+    if(contValidationSuccess == 0){
       let paint:Paint = new Paint(this.valX, this.valY)
       this.instructionService.addInstruction('paint', paint);
       this.variavelCompartilhada = 10;
       this.variavelCompartilhadaChange.emit(this.variavelCompartilhada);
     }
+    
 
   }
 

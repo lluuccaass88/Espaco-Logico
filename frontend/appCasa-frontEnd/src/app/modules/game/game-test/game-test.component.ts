@@ -15,11 +15,8 @@ export class GameTestComponent {
   correcAnswer?: boolean
 
   public async nextPhase() {
-    //DESCOMENTAR DEPOIS
-    // localStorage.removeItem('instructionList') 
-    //Requisição para aumentar o level do usuário
-
-
+    localStorage.removeItem('instructionList') 
+    
     await (await this.levelService.nextLevel(localStorage.getItem('authToken')))
 
     this.router.navigate(['/game']);

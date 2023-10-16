@@ -37,7 +37,7 @@
             <p class="titleLow">Ação:</p>
             <select class="dropdown-input" name="action" placeholder="Escolha seu papel" [(ngModel)]="manipulationVariable">
                 <option value="" disabled selected> </option>
-                <option value="-">Somar</option>
+                <option value="+">Somar</option>
                 <option value="-">Diminuir</option>
               </select>
             <p class="titleLow">Valor:</p>
@@ -47,6 +47,7 @@
         </div>
 
         <div *ngIf="formactionPaint">
+            <p class="titleLow">Pintar:</p>
             <p class="titleLow">Valor de X:</p>
             <input type="email" class="rounded-input" name="emailInput" [(ngModel)]="valX"> 
             <p class="titleLow">Valor de Y:</p>
