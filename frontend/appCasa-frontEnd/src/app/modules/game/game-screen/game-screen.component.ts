@@ -1,10 +1,11 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
 import { BuildComands } from '../../components/BuildComands';
 import * as Konva from 'konva';
 import { InstructionService } from 'src/app/service/InstructionService';
 import { Router } from '@angular/router';
 import { LevelService } from 'src/app/service/LevelService';
 import { Level } from 'src/app/model/Level';
+import { FlowchartComponent } from '../../components/flowchart/flowchart.component';
 
 @Component({
   selector: 'app-game-screen',
@@ -15,7 +16,7 @@ export class GameScreenComponent {
   @Output() showModalChange: EventEmitter<number> = new EventEmitter<number>();
   @Output() showErrorMessageInstruction: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() errorMessageInstruction: EventEmitter<String> = new EventEmitter<String>();
-  
+  @ViewChild(FlowchartComponent) flowchartComponent: FlowchartComponent | undefined;
 
   showModal:number = 10;
   showErrorMessage: boolean = false;
@@ -145,7 +146,8 @@ export class GameScreenComponent {
 
   public async removelastInstruction(){
     this.instructionService.removeLastInstruction()
-    // console.log("oi")
+    this.flowchartComponent?.loadInstructions(true)
+
   }
 
 }

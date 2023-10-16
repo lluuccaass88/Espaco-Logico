@@ -2,10 +2,10 @@
     <div class="left">
       <img (click)="backToStart()" src="../../../../assets/images/logo-mini1.png" alt="Imagem">
       <span (click)="backToStart()" class="titleLow">  Espaço Lógico</span>
-      <span (click)="download()" class="paragraph" href="#">   Download das atividades</span>
+      <span (click)="download()" class="paragraph" href="#" *ngIf="showDownload==true">   Download das atividades</span>
     </div>
     <div class="right">
-      <span (click)="logout()" class="paragraph" href="#">Sair</span>
+      <span (click)="logout()" class="paragraph" href="#" *ngIf="showLogout==true">Sair</span>
     </div>
   </div>
   

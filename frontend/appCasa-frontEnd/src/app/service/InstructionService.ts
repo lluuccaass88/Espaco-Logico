@@ -29,10 +29,12 @@ export class InstructionService {
     if (storedList) { 
       //Transforma o conteudo do salvo no localstorage em um objeto JSON
       instructionList = JSON.parse(storedList)
-      if(instruction.length == 0){
+      if(instructionList.length == 0){
         isFirst = true
+      }else{
+        isFirst = false;
+        
       }
-      isFirst = false;
       variableToSave = this.buildInstruction(type, instruction, isFirst);
     } else {
       isFirst = true;
@@ -332,7 +334,7 @@ export class InstructionService {
         instruction.positionX = 310 //Atribui para a posição x da nova instrução o valor 120
       } 
     }else{ //Caso a instrução não seja do tipo for ou if
-      if(!instructionList){ //Verifica se a instructions list esta vazia
+      if(!instructionList || instructionList.length == 0){ //Verifica se a instructions list esta vazia
         instruction.positionY = 100 //Atribui para a posição y na nova instrução o valor de 100;
       }else{ //Se não estiver vazia
         currentInstruction = instructionList[instructionList.length-1]; //currentInstruction resebe a ultima posiçao do array
@@ -374,21 +376,26 @@ export class InstructionService {
     let variableToSave: any|undefined
 
     if (storedList) { 
-      instructionList = JSON.parse(storedList)
+      try{
+        instructionList = JSON.parse(storedList)
+        instructionList.pop();
+        localStorage.setItem('instructionList', JSON.stringify(instructionList));
 
-      instructionList.pop();
+        console.log(instructionList)
 
-    localStorage.setItem('instructionList', JSON.stringify(instructionList));
+        this.apiInstructionService.newInstruction(instructionList).subscribe(res => {
+          console.log(res)
+        });
 
-    this.apiInstructionService.newInstruction(instructionList).subscribe(res => {
-      console.log(res)
-    });
+        if(instructionList.length == 0){
+          localStorage.removeItem('instructionList') 
+        }
 
-    if(instructionList.length == 0){
-      localStorage.removeItem('instructionList') 
-    }
-
-      return true
+        return true
+      }catch(error){
+        console.log("Erro ao deletar uma instrução - " + error)
+        return false;
+      }
     } else {
       return "Nenhuma instrulção encontrada para deletar"
     }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { Instruction } from '../model/instruction/Instruction';
 
 @Injectable({
   providedIn: 'root' // Indicates that this service is available at the root level
@@ -19,9 +20,25 @@ export class ApiInstructionService {
   }
 
   newInstruction(data: any): Observable<any> {
-    console.log("Enviando nova instrução")
+    let dataEnv;
+
+      dataEnv = {
+        user_id: localStorage.getItem('authToken'),
+        instruction: data
+      }
+
+
+
+    try{
+      console.log("Enviando nova instrução")
     const url = `${this.URL_SERVER}/instruction/registerInstruction`;
-    return this.http.post(url, data);
+    return this.http.post(url, dataEnv);
+    }catch(error){
+      console.log("Erro ao deletar instructioi - " + error)
+      return new Observable<any>
+    }
+
+    
   }
 
   async testInstruction(data: any): Promise<Observable<any>> {
